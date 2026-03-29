@@ -1,5 +1,6 @@
+
 public class LaundryService {
-    
+
     String idService;
     String namaLayanan;
     double hargaPerKg;
@@ -20,8 +21,8 @@ public class LaundryService {
 
     // Method tampilkan data
     public String toString() {
-        return idService + " | " + namaLayanan + 
-               " | Rp" + hargaPerKg + "/kg" +
-               " | Estimasi: " + estimasiHari + " hari";
+        return idService + " | " + namaLayanan
+                + " | Rp" + hargaPerKg + "/kg"
+                + " | Estimasi: " + estimasiHari + " hari";
     }
 }
