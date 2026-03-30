@@ -107,9 +107,9 @@ public class MainLaundry {
                     if (orderKirim != null) {
                         int idx = orders.indexOf(orderKirim);
 
-                        boolean suksesKirim = kurir.kirimOrder(idx);
+                        boolean berhasil = kurir.kirimOrder(idx);
 
-                        if (suksesKirim) {
+                        if (berhasil) {
                             // Hanya simpan ke file dan munculkan pesan sukses jika laundry MEMANG sudah
                             // selesai
                             updateFileOrder(orders);
