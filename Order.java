@@ -1,42 +1,31 @@
 public class Order {
     String idOrder;
     Customer customer;
-    String layanan;
+    LaundryService service;
     double berat;
     double harga;
     StatusLaundry status;
     boolean sudahBayar;
     boolean antarJemput;
 
-    public Order(String idOrder, Customer customer, String layanan, double berat, boolean antarJemput) {
+    public Order(String idOrder, Customer customer, LaundryService service, double berat, boolean antarJemput) {
         this.idOrder = idOrder;
         this.customer = customer;
-        this.layanan = layanan;
+        this.service = service;
         this.berat = berat;
         this.antarJemput = antarJemput;
         this.status = StatusLaundry.DITERIMA;
         this.sudahBayar = false;
 
-        hitungHarga();
-    }
-
-    void hitungHarga() {
-        switch (layanan.toLowerCase()) {
-            case "cuci":
-                harga = berat * 5000;
-                break;
-            case "setrika":
-                harga = berat * 4000;
-                break;
-            default:
-                harga = berat * 6000;
-        }
+        // 🔥 ambil harga dari service
+        this.harga = service.hitungHarga(berat);
     }
 
     public String toString() {
-        return idOrder + " | " + customer.nama + " | " + layanan +
+        return idOrder + " | " + customer.nama + " | " + service.namaLayanan +
                 " | " + berat + "kg | Rp" + harga +
                 " | " + status +
+                " | Antar: " + (antarJemput ? "Ya" : "Tidak") +
                 " | Bayar: " + (sudahBayar ? "Lunas" : "Belum");
     }
 }

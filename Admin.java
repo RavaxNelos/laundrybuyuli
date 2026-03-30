@@ -10,18 +10,34 @@ public class Admin {
     }
 
     public void lihatOrder() {
-        for (Order o : orders) {
-            System.out.println(o);
+
+        // cek kalau kosong
+        if (orders.isEmpty()) {
+            System.out.println("Belum ada order!");
+            return;
+        }
+
+        // 🔥 header
+        System.out.println("=== DAFTAR ORDER ===");
+
+        // tampilkan data
+        for (int i = 0; i < orders.size(); i++) {
+            System.out.println(i + ". " + orders.get(i));
         }
     }
 
     public void updateStatus(int index) {
         Order o = orders.get(index);
 
-        if (o.status.ordinal() < StatusLaundry.values().length - 1) {
+        // ❗ batasi sampai SELESAI (bukan DIKIRIM)
+        if (o.status == StatusLaundry.SELESAI) {
+            System.out.println("Laundry sudah selesai! Tidak bisa diupdate lagi oleh admin.");
+            return;
+        }
+
+        if (o.status.ordinal() < StatusLaundry.SELESAI.ordinal()) {
             o.status = StatusLaundry.values()[o.status.ordinal() + 1];
-        } else {
-            System.out.println("Status sudah paling akhir!");
+            System.out.println("Status berhasil diupdate menjadi: " + o.status);
         }
     }
 }

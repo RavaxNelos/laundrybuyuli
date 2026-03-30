@@ -14,7 +14,8 @@ public class Customer {
         this.alamat = alamat;
     }
 
+    @Override
     public String toString() {
-        return id + " | " + nama + " | " + noHp;
+        return id + " | " + nama + " | " + noHp + " | " + alamat;
     }
 }

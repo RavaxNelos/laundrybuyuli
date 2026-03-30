@@ -7,122 +7,120 @@ public class MainLaundry {
         Scanner sc = new Scanner(System.in);
         ArrayList<Customer> customers = new ArrayList<>();
         ArrayList<Order> orders = new ArrayList<>();
+        ArrayList<LaundryService> services = new ArrayList<>();
+
+        services.add(new LaundryService("SRV1", "Cuci Basah", 5000, 2));
+        services.add(new LaundryService("SRV2", "Cuci Kering", 6000, 2));
+        services.add(new LaundryService("SRV3", "Setrika", 4000, 1));
+        services.add(new LaundryService("SRV4", "Cuci + Setrika", 7000, 2));
+        services.add(new LaundryService("SRV5", "Karpet", 8000, 3));
+        services.add(new LaundryService("SRV6", "Bed Cover", 10000, 3));
 
         Admin admin = new Admin(customers, orders);
         Courier kurir = new Courier(orders);
 
-        int menu;
+        int menu = -1; // 🔥 penting!
 
         do {
             System.out.println("\n=== LAUNDRY BU YULI ===");
-            System.out.println("1. Tambah Customer");
-            System.out.println("2. Buat Order");
-            System.out.println("3. Lihat Order");
-            System.out.println("4. Update Status (Admin)");
-            System.out.println("5. Kirim Laundry (Kurir)");
-            System.out.println("6. Bayar");
+            System.out.println("1. Menu Pembeli");
+            System.out.println("2. Lihat Order");
+            System.out.println("3. Update Status");
+            System.out.println("4. Kirim Laundry");
+            System.out.println("5. Konfirmasi Pembayaran");
             System.out.println("0. Exit");
+
             System.out.print("Pilih: ");
+
+            // 🔒 validasi input
+            if (!sc.hasNextInt()) {
+                System.out.println("Input harus berupa angka!");
+                sc.next(); // buang input salah
+                continue;
+            }
+
             menu = sc.nextInt();
             sc.nextLine();
 
             switch (menu) {
 
                 case 1:
-                    System.out.print("ID: ");
-                    String id = sc.nextLine();
-                    System.out.print("Nama: ");
-                    String nama = sc.nextLine();
-                    System.out.print("No HP: ");
-                    String hp = sc.nextLine();
-                    System.out.print("Alamat: ");
-                    String alamat = sc.nextLine();
-
-                    customers.add(new Customer(id, nama, hp, alamat));
+                    MenuPembeli.jalankan(sc, customers, orders, services);
                     break;
 
                 case 2:
-
-                    // 🔥 tampilkan daftar customer dulu
-                    if (customers.isEmpty()) {
-                        System.out.println("Belum ada customer!");
-                        break;
-                    }
-
-                    for (int i = 0; i < customers.size(); i++) {
-                        System.out.println(i + ". " + customers.get(i));
-                    }
-
-                    // 🔽 baru input setelah lihat list
-                    System.out.print("Pilih Customer index: ");
-                    int c = sc.nextInt();
-                    sc.nextLine();
-
-                    // 🔒 validasi biar tidak error
-                    if (c < 0 || c >= customers.size()) {
-                        System.out.println("Index tidak valid!");
-                        break;
-                    }
-
-                    System.out.print("Layanan: ");
-                    String layanan = sc.nextLine();
-
-                    System.out.print("Berat: ");
-                    double berat = sc.nextDouble();
-
-                    sc.nextLine();
-                    System.out.print("Antar Jemput (y/n): ");
-                    String input = sc.nextLine();
-
-                    boolean antar = input.equalsIgnoreCase("y") || input.equalsIgnoreCase("ya");
-
-                    Order o = new Order("ORD" + (orders.size() + 1), customers.get(c), layanan, berat, antar);
-                    orders.add(o);
-                    break;
-
-                case 3:
                     admin.lihatOrder();
                     break;
 
-                case 4:
-
+                case 3:
                     if (orders.isEmpty()) {
                         System.out.println("Belum ada order!");
                         break;
                     }
 
-                    // 🔥 tampilkan daftar order
-                    System.out.println("=== DAFTAR ORDER ===");
-                    for (int i = 0; i < orders.size(); i++) {
-                        System.out.println(i + ". " + orders.get(i));
+                    admin.lihatOrder();
+                    System.out.print("Index: ");
+                    if (!sc.hasNextInt()) {
+                        System.out.println("Input harus angka!");
+                        sc.next(); // buang input salah
+                        break;
                     }
-
-                    // 🔽 input index
-                    System.out.print("Pilih index order: ");
                     int i = sc.nextInt();
 
-                    // 🔒 validasi
+                    // validasi index
                     if (i < 0 || i >= orders.size()) {
                         System.out.println("Index tidak valid!");
                         break;
                     }
 
-                    // 🔄 update status
                     admin.updateStatus(i);
-
-                    System.out.println("Status berhasil diupdate!");
                     break;
 
-                case 5:
-                    System.out.print("Index order: ");
+                case 4:
+                    if (orders.isEmpty()) {
+                        System.out.println("Belum ada order!");
+                        break;
+                    }
+
+                    admin.lihatOrder();
+                    System.out.print("Index: ");
+                    if (!sc.hasNextInt()) {
+                        System.out.println("Input harus angka!");
+                        sc.next(); // buang input salah
+                        break;
+                    }
                     int k = sc.nextInt();
+
+                    if (k < 0 || k >= orders.size()) {
+                        System.out.println("Index tidak valid!");
+                        break;
+                    }
+
                     kurir.kirimOrder(k);
                     break;
 
-                case 6:
-                    System.out.print("Index order: ");
+                case 5:
+                    if (orders.isEmpty()) {
+                        System.out.println("Belum ada order!");
+                        break;
+                    }
+
+                    admin.lihatOrder();
+                    System.out.print("Index: ");
+                    if (!sc.hasNextInt()) {
+                        System.out.println("Input harus angka!");
+                        sc.next(); // buang input salah
+                        break;
+                    }
                     int b = sc.nextInt();
+
+                    if (b < 0 || b >= orders.size()) {
+                        System.out.println("Index tidak valid!");
+                        break;
+                    }
+
                     orders.get(b).sudahBayar = true;
+                    System.out.println("Pembayaran dikonfirmasi!");
                     break;
             }
 
