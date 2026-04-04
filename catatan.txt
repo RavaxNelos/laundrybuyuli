@@ -1,6 +1,6 @@
-📌 CARA MENJALANKAN
+CARA MENJALANKAN
 
-👉 Run:
+Run:
 
 MainLaundry.java
 📋 MENU
@@ -42,3 +42,6 @@ tempServ
 
 blablablai bubjer
 israel babi
+rava
+bhinar asli ngawi
+
