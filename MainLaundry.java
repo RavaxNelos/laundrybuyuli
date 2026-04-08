@@ -24,7 +24,7 @@ public class MainLaundry { // class utama program
         Courier kurir = new Courier("CR1", "Kurir 1", "08129876543", orders);
 
         // load data dari file .txt ke dalam ArrayList
-        runSistem.loadDataDariFile(orders, services, customers);
+        customerManage.loadDataDariFile(orders, services, customers);
 
         int menu = -1; // variabel untuk menyimpan pilihan menu
 
@@ -56,11 +56,11 @@ public class MainLaundry { // class utama program
                         System.out.println("Belum ada order di sistem!");
                         break;
                     }
-                    lihatOrderDariFile(); // tampilkan data order dari file
+                    adminManage.lihatOrderDariFile(); // tampilkan data order dari file
                     break;
 
                 case 2:
-                    loadCustomerDariFile(customers); // isi dulu list
+                    adminManage.loadCustomerDariFile(customers); // isi dulu list
 
                     // cek list customer
                     if (customers.isEmpty()) {
@@ -81,7 +81,7 @@ public class MainLaundry { // class utama program
                         break;
                     }
 
-                    lihatOrderDariFile(); // tampilkan data order
+                    adminManage.lihatOrderDariFile(); // tampilkan data order
                     System.out.print("Masukkan ID Order: ");
                     String idUpdate = sc.nextLine().trim(); // input ID
 
@@ -99,7 +99,7 @@ public class MainLaundry { // class utama program
                         int idx = orders.indexOf(orderUpdate); // ambil index
                         admin.updateStatus(idx); // update status lewat admin
 
-                        updateFileOrder(orders); // simpan ke file
+                        adminManage.updateFileOrder(orders); // simpan ke file
                         System.out.println("Status Berhasil Diperbarui!");
                     } else {
                         System.out.println("ID Order tidak ditemukan!");
@@ -113,7 +113,7 @@ public class MainLaundry { // class utama program
                         break;
                     }
 
-                    lihatOrderDariFile(); // tampilkan data
+                    adminManage.lihatOrderDariFile(); // tampilkan data
                     System.out.print("Masukkan ID Order: ");
                     String idKirim = sc.nextLine().trim(); // input ID
 
@@ -133,7 +133,7 @@ public class MainLaundry { // class utama program
                         boolean berhasil = kurir.kirimOrder(idx); // proses kirim
 
                         if (berhasil) {
-                            updateFileOrder(orders); // simpan ke file
+                            adminManage.updateFileOrder(orders); // simpan ke file
                             System.out.println("Konfirmasi Pengiriman Berhasil!");
                         }
 
@@ -146,94 +146,5 @@ public class MainLaundry { // class utama program
         } while (menu != 0); // ulang sampai pilih 0 (keluar)
     }
 
-    // method untuk membaca data customer dari file
-    static void loadCustomerDariFile(ArrayList<Customer> customers) {
-        try {
-            java.io.BufferedReader br = new java.io.BufferedReader(
-                    new java.io.FileReader("customers.txt")); // buka file
-
-            String line;
-            customers.clear(); // kosongkan dulu
-            System.out.println("\n=== DATA CUSTOMER ===");
-
-            while ((line = br.readLine()) != null) { // baca per baris
-                String[] data = line.split("\\|"); // pisahkan data
-
-                // MASUKKAN KE ARRAYLIST
-                customers.add(new Customer(
-                        data[0],
-                        data[1],
-                        data[2],
-                        data[3]));
-            }
-
-            br.close(); // tutup file
-
-        } catch (Exception e) {
-            System.out.println("Gagal membaca file customer!");
-        }
-    }
-
-    // method untuk membaca data order dari file
-    static void lihatOrderDariFile() {
-        try {
-            java.io.BufferedReader br = new java.io.BufferedReader(
-                    new java.io.FileReader("orders.txt"));
-
-            String line;
-            System.out.println("\n=== DATA ORDER ===");
-
-            // header tabel
-            System.out.println(
-                    "------------------------------------------------------------------------------------------------------------------------");
-            System.out.printf("%-7s | %-12s | %-15s | %-7s | %-10s | %-12s | %-12s | %-10s\n",
-                    "ID", "Customer", "Layanan", "Berat", "Harga", "Status", "Pembayaran", "Antar");
-            System.out.println(
-                    "------------------------------------------------------------------------------------------------------------------------");
-
-            while ((line = br.readLine()) != null) {
-                String[] data = line.split("\\|"); // split data
-
-                // tampilkan data order dalam bentuk tabel
-                System.out.printf("%-7s | %-12s | %-15s | %-5skg | Rp%-8s | %-12s | %-12s | %-10s\n",
-                        data[0], data[1], data[2], data[3],
-                        data[4], data[5], data[6], data[7]);
-            }
-
-            System.out.println(
-                    "------------------------------------------------------------------------------------------------------------------------");
-
-            br.close();
-
-        } catch (Exception e) {
-            System.out.println("Gagal membaca file order!");
-        }
-    }
-
-    // method untuk update file order
-    static void updateFileOrder(ArrayList<Order> orders) {
-        try {
-            java.io.FileWriter fw = new java.io.FileWriter("orders.txt", false); // overwrite file
-
-            for (Order o : orders) { // loop semua order
-                String statusBayarTeks = o.sudahBayar ? "Sudah Bayar" : "Belum Bayar";
-                String statusAntarTeks = o.antarJemput ? "Diantar" : "Diambil";
-
-                // simpan ke file dengan format tertentu
-                fw.write(o.idOrder + "|" +
-                        o.customer.nama + "|" +
-                        o.service.namaLayanan + "|" +
-                        o.berat + "|" +
-                        o.harga + "|" +
-                        o.status + "|" +
-                        statusBayarTeks + "|" +
-                        statusAntarTeks + "\n");
-            }
-
-            fw.close(); // tutup file
-
-        } catch (Exception e) {
-            System.out.println("Gagal memperbarui file database!");
-        }
-    }
+    
 }
