@@ -24,7 +24,7 @@ public class MainLaundry { // class utama program
         Courier kurir = new Courier("CR1", "Kurir 1", "08129876543", orders);
 
         // load data dari file .txt ke dalam ArrayList
-        MenuPembeli.loadDataDariFile(orders, services, customers);
+        runSistem.loadDataDariFile(orders, services, customers);
 
         int menu = -1; // variabel untuk menyimpan pilihan menu
 
