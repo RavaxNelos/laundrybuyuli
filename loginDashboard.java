@@ -1,12 +1,16 @@
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class loginDashboard {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String passLogin, confirmPass = "", nameLogin = "", noReg = "", nameReg = "", passReg = "";
+        ArrayList<Customer> customers = new ArrayList<>();
+        String regID = "", passLogin, confirmPass = "", nameLogin = "", noReg = "", nameReg = "", passReg = "", alamat = "";
+        String namaUser = "", passUser = "";
         int choose;
+        customerManage.loadCustomerDariFile(customers);
         do {
             System.out.println("Login Dashboard Laundry Bu Yuli");
             System.out.println("1. Register\n2. Login");
@@ -23,11 +27,16 @@ public class loginDashboard {
                         nameReg = sc.nextLine();
                         System.out.print("Masukkan Nomor HP   : ");
                         noReg = sc.nextLine();
+                        System.out.print("Masukkan Alamat     : ");
+                        alamat = sc.nextLine();
                         System.out.print("Masukkan Password   : ");
                         passReg = sc.nextLine();
                         System.out.print("Konfirmasi Password : ");
                         confirmPass = sc.nextLine();
                     } while (!passReg.equals(confirmPass));
+                    Customer cust = new Customer(regID, nameReg, noReg, alamat, passReg);
+                    customers.add(cust);
+                    customerManage.simpanCustomer(cust);
                     System.out.println("Pendaftaran berhasil!");
                     break;
                 case 2:
@@ -36,10 +45,23 @@ public class loginDashboard {
                         nameLogin = sc.nextLine();
                         System.out.print("Masukkan Password   : ");
                         passLogin = sc.nextLine();
-                    } while (nameLogin.equalsIgnoreCase(nameReg) && passLogin.equals(passReg));
+                        try {
+                            java.io.BufferedReader br = new java.io.BufferedReader(
+                                    new java.io.FileReader("customers.txt"));
+                            String line;
+                            while ((line = br.readLine()) != null) {
+                                String[] data = line.split("\\|");
+                                namaUser = data[1];
+                                passUser = data[4];
+                            }
+                        } catch (Exception e) {
+                            // TODO: handle exception
+                        }
+                    } while (namaUser == nameReg && passUser == passReg);
                     System.out.println("Anda berhasil login!");
-                    break;
+
             }
+
         } while (choose != 0);
 
     }

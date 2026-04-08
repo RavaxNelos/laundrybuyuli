@@ -60,7 +60,7 @@ public class MainLaundry { // class utama program
                     break;
 
                 case 2:
-                    adminManage.loadCustomerDariFile(customers); // isi dulu list
+                    customerManage.loadCustomerDariFile(customers); // isi dulu list
 
                     // cek list customer
                     if (customers.isEmpty()) {

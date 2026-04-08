@@ -1,33 +1,10 @@
+
 import java.util.ArrayList;
 
 public class adminManage {
+
     // method untuk membaca data customer dari file
-    static void loadCustomerDariFile(ArrayList<Customer> customers) {
-        try {
-            java.io.BufferedReader br = new java.io.BufferedReader(
-                    new java.io.FileReader("customers.txt")); // buka file
-
-            String line;
-            customers.clear(); // kosongkan dulu
-            System.out.println("\n=== DATA CUSTOMER ===");
-
-            while ((line = br.readLine()) != null) { // baca per baris
-                String[] data = line.split("\\|"); // pisahkan data
-
-                // MASUKKAN KE ARRAYLIST
-                customers.add(new Customer(
-                        data[0],
-                        data[1],
-                        data[2],
-                        data[3]));
-            }
-
-            br.close(); // tutup file
-
-        } catch (Exception e) {
-            System.out.println("Gagal membaca file customer!");
-        }
-    }
+    
 
     // method untuk membaca data order dari file
     static void lihatOrderDariFile() {
@@ -75,14 +52,14 @@ public class adminManage {
                 String statusAntarTeks = o.antarJemput ? "Diantar" : "Diambil";
 
                 // simpan ke file dengan format tertentu
-                fw.write(o.idOrder + "|" +
-                        o.customer.nama + "|" +
-                        o.service.namaLayanan + "|" +
-                        o.berat + "|" +
-                        o.harga + "|" +
-                        o.status + "|" +
-                        statusBayarTeks + "|" +
-                        statusAntarTeks + "\n");
+                fw.write(o.idOrder + "|"
+                        + o.customer.nama + "|"
+                        + o.service.namaLayanan + "|"
+                        + o.berat + "|"
+                        + o.harga + "|"
+                        + o.status + "|"
+                        + statusBayarTeks + "|"
+                        + statusAntarTeks + "\n");
             }
 
             fw.close(); // tutup file

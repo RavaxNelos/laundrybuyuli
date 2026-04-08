@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,10 +9,9 @@ public class MenuPembeli {
         return " ".repeat(Math.max(0, padding)) + text;
     }
 
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
+        String password = "";
         ArrayList<Customer> customers = new ArrayList<>();
         ArrayList<Order> orders = new ArrayList<>();
         ArrayList<LaundryService> services = new ArrayList<>();
@@ -91,7 +91,7 @@ public class MenuPembeli {
 
                     } while (!alamat.matches("[a-zA-Z ]+"));
 
-                    Customer cust = new Customer(id, nama, hp, alamat);
+                    Customer cust = new Customer(id, nama, hp, alamat, password);
                     customers.add(cust);
                     customerManage.simpanCustomer(cust); // simpan ke file
 
@@ -160,7 +160,7 @@ public class MenuPembeli {
                     if (antar) {
                         System.out.println("Akan dikirim kurir");
                     } else {
-                        System.out.println("Ambil sendiri");
+                        System.out.println("Aja sendiri");
                     }
 
                     // BUAT ORDER
@@ -193,8 +193,9 @@ public class MenuPembeli {
                         System.out.print("\nMasukkan ID Order yang ingin dibayar (atau ketik 'batal'): ");
                         String idInput = sc.nextLine().trim();
 
-                        if (idInput.equalsIgnoreCase("batal"))
+                        if (idInput.equalsIgnoreCase("batal")) {
                             break;
+                        }
 
                         for (Order ord : orders) {
                             if (ord.idOrder.equalsIgnoreCase(idInput)) {

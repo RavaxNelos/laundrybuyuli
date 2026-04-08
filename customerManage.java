@@ -1,6 +1,9 @@
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class customerManage {
+
     public static String centerText(String text, int width) {
         int padding = (width - text.length()) / 2;
         return " ".repeat(Math.max(0, padding)) + text;
@@ -9,7 +12,7 @@ public class customerManage {
     static void simpanCustomer(Customer c) {
         try {
             java.io.FileWriter fw = new java.io.FileWriter("customers.txt", true);
-            fw.write(c.id + "|" + c.nama + "|" + c.noHp + "|" + c.alamat + "\n");
+            fw.write(c.id + "|" + c.nama + "|" + c.noHp + "|" + c.alamat + "|" + c.password + "\n");
             fw.close();
         } catch (Exception e) {
             System.out.println("Gagal simpan customer!");
@@ -25,13 +28,14 @@ public class customerManage {
             String statusAntarTeks = o.antarJemput ? "Diantar" : "Diambil";
 
             // Menulis ke file dengan format baru
-            fw.write(o.idOrder + "|" +
-                    o.customer.nama + "|" +
-                    o.service.namaLayanan + "|" +
-                    o.berat + "|" +
-                    o.harga + "|" +
-                    o.status + "|" +
-                    statusBayarTeks + "|" + // Menggunakan teks hasil konversi
+            fw.write(o.idOrder + "|"
+                    + o.customer.nama + "|"
+                    + o.service.namaLayanan + "|"
+                    + o.berat + "|"
+                    + o.harga + "|"
+                    + o.status + "|"
+                    + statusBayarTeks + "|"
+                    + // Menggunakan teks hasil konversi
                     statusAntarTeks + "\n"); // Menggunakan teks hasil konversi
 
             fw.close();
@@ -48,14 +52,14 @@ public class customerManage {
                 String statusBayarTeks = o.sudahBayar ? "Sudah Bayar" : "Belum Bayar";
                 String statusAntarTeks = o.antarJemput ? "Diantar" : "Diambil";
 
-                fw.write(o.idOrder + "|" +
-                        o.customer.nama + "|" +
-                        o.service.namaLayanan + "|" +
-                        o.berat + "|" +
-                        o.harga + "|" +
-                        o.status + "|" +
-                        statusBayarTeks + "|" +
-                        statusAntarTeks + "\n");
+                fw.write(o.idOrder + "|"
+                        + o.customer.nama + "|"
+                        + o.service.namaLayanan + "|"
+                        + o.berat + "|"
+                        + o.harga + "|"
+                        + o.status + "|"
+                        + statusBayarTeks + "|"
+                        + statusAntarTeks + "\n");
             }
             fw.close();
         } catch (Exception e) {
@@ -67,18 +71,19 @@ public class customerManage {
             ArrayList<Customer> customers) {
         try {
             java.io.File file = new java.io.File("orders.txt");
-            if (!file.exists())
+            if (!file.exists()) {
                 return; // Jika file belum ada, abaikan
-
+            }
             java.io.BufferedReader br = new java.io.BufferedReader(new java.io.FileReader(file));
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split("\\|");
-                if (data.length < 8)
+                if (data.length < 8) {
                     continue;
+                }
 
                 // Buat objek pendukung (Dummy/Sederhana karena kita hanya butuh Nama & Layanan)
-                Customer tempCust = new Customer("CUST_TEMP", data[1], "", "");
+                Customer tempCust = new Customer("CUST_TEMP", data[1], "", "", "");
                 LaundryService tempServ = new LaundryService("", data[2], 0, 0);
 
                 // Buat objek Order berdasarkan data file
@@ -99,8 +104,9 @@ public class customerManage {
     public static void loadCustomerDariFile(ArrayList<Customer> customers) {
         try {
             java.io.File file = new java.io.File("customers.txt");
-            if (!file.exists())
+            if (!file.exists()) {
                 return;
+            }
 
             java.io.BufferedReader br = new java.io.BufferedReader(new java.io.FileReader(file));
             String line;
@@ -110,12 +116,41 @@ public class customerManage {
                 String[] data = line.split("\\|");
                 if (data.length >= 4) {
                     // Tambahkan customer lama ke dalam list memori
-                    customers.add(new Customer(data[0], data[1], data[2], data[3]));
+                    customers.add(new Customer(data[0], data[1], data[2], data[3], data[4]));
                 }
             }
             br.close();
         } catch (Exception e) {
             System.out.println("Gagal memuat data customer: " + e.getMessage());
         }
+    }
+
+    public static Customer verifLogin(List<Customer> customers, String nameTarget, String passTarget) {
+        try {
+            java.io.BufferedReader br = new java.io.BufferedReader(
+                    new java.io.FileReader("customers.txt"));
+            String line = "", nama = "", pass = "";
+            boolean login = false;
+
+            while ((line = br.readLine()) != null){
+            String[] data = line.split("\\|");
+            nama = data[1];
+            pass = data[4];
+            for (Customer cust : customers) {
+                if (nama == nameTarget && pass == passTarget) {
+                    login = true;
+                    return cust;
+                }
+            }
+            if (!login){
+                System.out.println("Data tidak ditemukan");
+            }
+        }
+
+        } catch (Exception e) {
+
+        }
+
+        return null;
     }
 }
