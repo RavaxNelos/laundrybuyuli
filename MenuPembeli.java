@@ -8,8 +8,8 @@ public class MenuPembeli {
         int padding = (width - text.length()) / 2;
         return " ".repeat(Math.max(0, padding)) + text;
     }
-
-    public static void main(String[] args) {
+    // pengecekan akun customer setelah login
+    public static void main(String[] args, Customer userLogin) {
         Scanner sc = new Scanner(System.in);
         String password = "";
         ArrayList<Customer> customers = new ArrayList<>();
@@ -30,6 +30,7 @@ public class MenuPembeli {
         int pilih = -1;
 
         do {
+            // System.out.println("Login sebagai: " + userLogin.nama);
             System.out.println("\n=== MENU PEMBELI ===");
             System.out.println("1. Pesan Laundry");
             System.out.println("2. Konfirmasi Pembayaran");

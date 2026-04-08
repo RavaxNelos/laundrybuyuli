@@ -101,6 +101,7 @@ public class customerManage {
         }
     }
 
+    // update ke dalam file txt customers
     public static void loadCustomerDariFile(ArrayList<Customer> customers) {
         try {
             java.io.File file = new java.io.File("customers.txt");
@@ -125,32 +126,13 @@ public class customerManage {
         }
     }
 
+    // method login cutomers menu pembeli
     public static Customer verifLogin(List<Customer> customers, String nameTarget, String passTarget) {
-        try {
-            java.io.BufferedReader br = new java.io.BufferedReader(
-                    new java.io.FileReader("customers.txt"));
-            String line = "", nama = "", pass = "";
-            boolean login = false;
-
-            while ((line = br.readLine()) != null){
-            String[] data = line.split("\\|");
-            nama = data[1];
-            pass = data[4];
-            for (Customer cust : customers) {
-                if (nama == nameTarget && pass == passTarget) {
-                    login = true;
-                    return cust;
-                }
-            }
-            if (!login){
-                System.out.println("Data tidak ditemukan");
+        for (Customer cust : customers) {
+            if (cust.nama.equals(nameTarget) && cust.password.equals(passTarget)) {
+                return cust; // login berhasil
             }
         }
-
-        } catch (Exception e) {
-
-        }
-
-        return null;
+        return null; // login gagal
     }
 }
