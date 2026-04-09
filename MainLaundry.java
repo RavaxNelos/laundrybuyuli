@@ -144,6 +144,7 @@ public class MainLaundry { // class utama program
             }
 
         } while (menu != 0); // ulang sampai pilih 0 (keluar)
+        sc.close();
     }
 
     

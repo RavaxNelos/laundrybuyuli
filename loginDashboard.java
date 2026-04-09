@@ -11,6 +11,7 @@ public class loginDashboard {
                 alamat = "";
         String namaUser = "", passUser = "";
         boolean login = false;
+        boolean error = false;
         int choose;
         customerManage.loadCustomerDariFile(customers);
         do {
@@ -68,14 +69,17 @@ public class loginDashboard {
                     } catch (Exception e) {
                         // TODO: handle exception
                         System.out.println("Login sebagai: " + loginUser.nama);
+
+                    }
+                    if (!error && login) {
+                        // MASUK KE MENU PEMBELI
+                        MenuPembeli.main(null, loginUser);
                         break;
                     }
-                    // MASUK KE MENU PEMBELI
-                    MenuPembeli.main(null, loginUser);
-                    break;
+
             }
 
         } while (choose != 0);
-
+        sc.close();
     }
 }
