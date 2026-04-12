@@ -11,7 +11,7 @@ public class menuTampilkan extends JPanel {
     public menuTampilkan(appData data) {
         this.data = data;
         // Refresh orders dari database
-        data.orders = OrderDatabase.getAllOrders(data.customers, data.services);
+        data.orders = OrderDatabase.getAllOrders();
         Customer currentUser = data.currentUser;
         ArrayList<Order> orders = data.orders;
         ArrayList<LaundryService> services = data.services;
@@ -42,6 +42,7 @@ public class menuTampilkan extends JPanel {
 
         for (Order o : orders) {
             if (o.customer != null && currentUser != null && currentUser.id.equals(o.customer.id)) {
+                System.out.println(currentUser.id + " == " + o.customer.id);
                 model.addRow(new Object[]{
                     o.idOrder,
                     o.customer.nama,

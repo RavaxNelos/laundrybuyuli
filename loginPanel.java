@@ -66,11 +66,13 @@ public class loginPanel extends JPanel {
         });
 
         loginButton.addActionListener(e -> {
-            String nameLogin = nameField.getText();
+            String namaLogin = nameField.getText().trim();
             String passLogin = new String(passField.getPassword());
-            Customer loginUser = customerManage.verifLogin(data.customers, nameLogin, passLogin);
+            
+            // Validasi login menggunakan database (berdasarkan nama customer)
+            Customer loginUser = customerDatabase.validateLoginByName(namaLogin, passLogin);
             if (loginUser != null) {
-                JOptionPane.showMessageDialog(this, "Berhasil Login");
+                JOptionPane.showMessageDialog(this, "Berhasil Login sebagai " + loginUser.nama);
                 data.currentUser = loginUser;
                 tesGUI.showDashboardPanel();
             } else {

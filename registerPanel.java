@@ -80,7 +80,15 @@ public class registerPanel extends JPanel {
 
                 Customer cust = new Customer(regID, nameReg, noReg, alamat, passReg);
                 
-                customerManage.simpanCustomer(cust);
+                // Simpan customer baru ke database
+                boolean saved = customerDatabase.saveCustomer(cust);
+                if (!saved) {
+                    JOptionPane.showMessageDialog(this, "Gagal menyimpan customer ke database!");
+                    return;
+                }
+                
+                // Tambah ke ArrayList juga agar langsung bisa dipakai
+                data.customers.add(cust);
             } while (false); 
             JOptionPane.showMessageDialog(null, "Registrasi berhasil!");
             tesGUI.showLoginPanel(); // kembali ke login panel setelah registrasi

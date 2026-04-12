@@ -74,7 +74,7 @@ public class OrderDatabase {
     }
 
     // Method untuk mengambil semua order dari database
-    public static ArrayList<Order> getAllOrders(ArrayList<Customer> customers, ArrayList<LaundryService> services) {
+    public static ArrayList<Order> getAllOrders() {
         ArrayList<Order> orders = new ArrayList<>();
         String sql = "SELECT * FROM orders ORDER BY created_at DESC";
 
@@ -90,15 +90,15 @@ public class OrderDatabase {
                 boolean sudahBayar = rs.getBoolean("sudah_bayar");
                 boolean antarJemput = rs.getBoolean("antar_jemput");
 
-                // Cari customer berdasarkan ID
-                Customer customer = findCustomerById(customers, customerId);
+                // Load customer dari database
+                Customer customer = customerDatabase.getCustomerById(customerId);
                 if (customer == null) {
                     // Jika customer tidak ditemukan, buat dummy customer
                     customer = new Customer(customerId, "Unknown", "", "", "");
                 }
 
-                // Cari service berdasarkan ID
-                LaundryService service = findServiceById(services, serviceId);
+                // Load service dari database
+                LaundryService service = serviceDatabase.getServiceById(serviceId);
                 if (service == null) {
                     // Jika service tidak ditemukan, buat dummy service
                     service = new LaundryService(serviceId, "Unknown Service", 0, 0);
@@ -161,7 +161,7 @@ public class OrderDatabase {
     }
 
     // Method untuk mencari order berdasarkan customer ID
-    public static ArrayList<Order> getOrdersByCustomerId(String customerId, ArrayList<Customer> customers, ArrayList<LaundryService> services) {
+    public static ArrayList<Order> getOrdersByCustomerId(String customerId) {
         ArrayList<Order> orders = new ArrayList<>();
         String sql = "SELECT * FROM orders WHERE customer_id=? ORDER BY created_at DESC";
 
@@ -179,8 +179,10 @@ public class OrderDatabase {
                 boolean sudahBayar = rs.getBoolean("sudah_bayar");
                 boolean antarJemput = rs.getBoolean("antar_jemput");
 
-                Customer customer = findCustomerById(customers, customerId);
-                LaundryService service = findServiceById(services, serviceId);
+                // Load customer dari database
+                Customer customer = customerDatabase.getCustomerById(customerId);
+                // Load service dari database
+                LaundryService service = serviceDatabase.getServiceById(serviceId);
 
                 if (customer != null && service != null) {
                     Order order = new Order(idOrder, customer, service, berat, antarJemput);
@@ -206,34 +208,5 @@ public class OrderDatabase {
             System.err.println("Test koneksi gagal: " + e.getMessage());
             return false;
         }
-    }
-
-    // =================================================================
-    // HELPER METHODS
-    // =================================================================
-    // Helper method untuk mencari customer berdasarkan ID
-    private static Customer findCustomerById(ArrayList<Customer> customers, String id) {
-        if (id == null || customers == null) {
-            return null;
-        }
-        for (Customer customer : customers) {
-            if (id.equals(customer.id)) {
-                return customer;
-            }
-        }
-        return null;
-    }
-
-    // Helper method untuk mencari service berdasarkan ID
-    private static LaundryService findServiceById(ArrayList<LaundryService> services, String id) {
-        if (id == null || services == null) {
-            return null;
-        }
-        for (LaundryService service : services) {
-            if (id.equals(service.idService)) {
-                return service;
-            }
-        }
-        return null;
     }
 }

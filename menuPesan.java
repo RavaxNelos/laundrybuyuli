@@ -11,7 +11,7 @@ public class menuPesan extends JPanel {
     public menuPesan(appData data) {
         this.data = data;
         // Load orders dari database menggunakan OrderDatabase
-        data.orders = OrderDatabase.getAllOrders(data.customers, data.services);
+        data.orders = OrderDatabase.getAllOrders();
         Customer currentUser = data.currentUser;
         ArrayList<Order> orders = data.orders;
         ArrayList<LaundryService> services = data.services;
@@ -146,12 +146,24 @@ public class menuPesan extends JPanel {
                     + "Antar/Jemput: " + (antarJemput ? "Ya" : "Tidak") + "\n"
                     + "Total Harga: Rp" + hargaTotal;
             System.out.println("Pesanan dibuat oleh " + currentUser.nama + "ID :" + currentUser.id);
+            
+            // Pastikan customer sudah tersimpan di database
+            Customer existingCustomer = customerDatabase.getCustomerById(currentUser.id);
+            if (existingCustomer == null) {
+                // Jika customer belum ada, simpan ke database
+                boolean customerSaved = customerDatabase.saveCustomer(currentUser);
+                if (!customerSaved) {
+                    JOptionPane.showMessageDialog(this, "Gagal menyimpan data customer ke database!");
+                    return;
+                }
+            }
+            
             int nextOrderNum = data.orders.isEmpty() ? 1 : data.orders.size() + 1;
             String orderID = "ORD" + nextOrderNum;
             Order newOrder = new Order(orderID, currentUser, layananDipilih, berat, antarJemput);
             data.orders.add(newOrder);
 
-            // Simpan ke database menggunakan OrderDatabase
+            // Simpan order ke database menggunakan OrderDatabase
             boolean saved = OrderDatabase.saveOrder(newOrder);
             if (saved) {
                 JOptionPane.showMessageDialog(this, pesan);

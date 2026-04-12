@@ -5,9 +5,12 @@ public class tesGUI {
     static JFrame frame = new JFrame("Laundry Bu Yuli");
     static appData data = new appData();
     public static void main(String[] args) {
-        customerManage.loadCustomerDariFile(data.customers); // load data customer dari file
+        // Load customer dan service dari database
+        data.customers = customerDatabase.getAllCustomers();
+        data.services = serviceDatabase.getAllServices();
         // Load orders dari database menggunakan OrderDatabase
-        data.orders = OrderDatabase.getAllOrders(data.customers, data.services);
+        data.orders = OrderDatabase.getAllOrders();
+        frame.setSize(900, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         showLoginPanel();
         frame.setVisible(true);

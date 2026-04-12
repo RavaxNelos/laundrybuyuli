@@ -1,3 +1,3 @@
 CUST1|Farhan|085733166486|Sidoarjo|memekdo
 CUST2|Rava|0923823823|Surabaya|kontolodon123
-CUST3|Bhinar|089800291293|Surabaya|jokowibaik
+CUST3|Bhinar|089800291293|Surabaya|jokowibaikCUST1|Farhan|082139963237|Perumtas 3 Blok M5 No.43|masanies

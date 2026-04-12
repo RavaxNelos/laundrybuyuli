@@ -6,12 +6,13 @@ public class TestDatabaseConnection {
         if (OrderDatabase.testConnection()) {
             System.out.println("✓ Database connection successful!");
 
-            // Test ambil semua orders
+            // Test ambil semua data dari database
             appData data = new appData();
-            customerManage.loadCustomerDariFile(data.customers);
+            data.customers = customerDatabase.getAllCustomers();
+            data.services = serviceDatabase.getAllServices();
 
             System.out.println("Loading orders from database...");
-            data.orders = OrderDatabase.getAllOrders(data.customers, data.services);
+            data.orders = OrderDatabase.getAllOrders();
 
             System.out.println("Found " + data.orders.size() + " orders in database");
 
