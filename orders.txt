@@ -1,0 +1,5 @@
+ORD1|CUST1|Farhan|Cuci Basah|10.0|50000.0|DITERIMA|Belum Bayar|Diantar
+ORD2|CUST1|Farhan|Cuci + Setrika|19.0|133000.0|DITERIMA|Belum Bayar|Diantar
+ORD3|CUST3|Bhinar|Setrika|21.0|84000.0|DITERIMA|Belum Bayar|Diantar
+ORD4|CUST3|Bhinar|Karpet|14.0|112000.0|DITERIMA|Belum Bayar|Diantar
+ORD5|CUST2|Rava|Setrika|20.0|80000.0|DITERIMA|Belum Bayar|Diantar

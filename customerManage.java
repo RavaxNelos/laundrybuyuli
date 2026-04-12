@@ -27,16 +27,15 @@ public class customerManage {
             String statusBayarTeks = o.sudahBayar ? "Sudah Bayar" : "Belum Bayar";
             String statusAntarTeks = o.antarJemput ? "Diantar" : "Diambil";
 
-            // Menulis ke file dengan format baru
             fw.write(o.idOrder + "|"
+                    + o.customer.id + "|"
                     + o.customer.nama + "|"
                     + o.service.namaLayanan + "|"
                     + o.berat + "|"
                     + o.harga + "|"
                     + o.status + "|"
                     + statusBayarTeks + "|"
-                    + // Menggunakan teks hasil konversi
-                    statusAntarTeks + "\n"); // Menggunakan teks hasil konversi
+                    + statusAntarTeks + "\n");
 
             fw.close();
         } catch (Exception e) {
@@ -53,6 +52,7 @@ public class customerManage {
                 String statusAntarTeks = o.antarJemput ? "Diantar" : "Diambil";
 
                 fw.write(o.idOrder + "|"
+                        + o.customer.id + "|"
                         + o.customer.nama + "|"
                         + o.service.namaLayanan + "|"
                         + o.berat + "|"
@@ -67,9 +67,22 @@ public class customerManage {
         }
     }
 
+    private static Customer findCustomerById(ArrayList<Customer> customers, String id) {
+        if (id == null) {
+            return null;
+        }
+        for (Customer cust : customers) {
+            if (id.equals(cust.id)) {
+                return cust;
+            }
+        }
+        return null;
+    }
+
     public static void loadDataDariFile(ArrayList<Order> orders, ArrayList<LaundryService> services,
             ArrayList<Customer> customers) {
         try {
+            orders.clear();
             java.io.File file = new java.io.File("orders.txt");
             if (!file.exists()) {
                 return; // Jika file belum ada, abaikan
@@ -82,16 +95,24 @@ public class customerManage {
                     continue;
                 }
 
-                // Buat objek pendukung (Dummy/Sederhana karena kita hanya butuh Nama & Layanan)
-                Customer tempCust = new Customer("CUST_TEMP", data[1], "", "", "");
-                LaundryService tempServ = new LaundryService("", data[2], 0, 0);
+                boolean hasCustomerId = data.length >= 9;
+                String orderId = data[0];
+                String custId = hasCustomerId ? data[1] : "CUST_TEMP";
+                String custName = hasCustomerId ? data[2] : data[1];
+                String serviceName = hasCustomerId ? data[3] : data[2];
+                int baseIndex = hasCustomerId ? 3 : 2;
 
-                // Buat objek Order berdasarkan data file
-                Order o = new Order(data[0], tempCust, tempServ, Double.parseDouble(data[3]), false);
-                o.harga = Double.parseDouble(data[4]);
-                o.status = StatusLaundry.valueOf(data[5]);
-                o.sudahBayar = data[6].equalsIgnoreCase("Sudah Bayar");
-                o.antarJemput = data[7].equalsIgnoreCase("Diantar");
+                Customer tempCust = findCustomerById(customers, custId);
+                if (tempCust == null) {
+                    tempCust = new Customer(custId, custName, "", "", "");
+                }
+                LaundryService tempServ = new LaundryService("", serviceName, 0, 0);
+
+                Order o = new Order(orderId, tempCust, tempServ, Double.parseDouble(data[baseIndex + 1]), false);
+                o.harga = Double.parseDouble(data[baseIndex + 2]);
+                o.status = StatusLaundry.valueOf(data[baseIndex + 3]);
+                o.sudahBayar = data[baseIndex + 4].equalsIgnoreCase("Sudah Bayar");
+                o.antarJemput = data[baseIndex + 5].equalsIgnoreCase("Diantar");
 
                 orders.add(o);
             }
@@ -135,4 +156,10 @@ public class customerManage {
         }
         return null; // login gagal
     }
+
+    public static void saveAllData(appData data) {
+        // Simpan semua order ke file, gunakan updateFileOrder untuk menimpa file lama
+        updateFileOrder(data.orders);
+    }
 }
+
