@@ -93,14 +93,14 @@ public class OrderDatabase {
                 boolean antarJemput = rs.getBoolean("antar_jemput");
 
                 // Load customer dari database
-                Customer customer = customerDatabase.getCustomerById(customerId);
+                Customer customer = CustomerDatabase.getCustomerById(customerId);
                 if (customer == null) {
                     // Jika customer tidak ditemukan, buat dummy customer
                     customer = new Customer(customerId, "Unknown", "", "", "");
                 }
 
                 // Load service dari database
-                LaundryService service = serviceDatabase.getServiceById(serviceId);
+                LaundryService service = ServiceDatabase.getServiceById(serviceId);
                 if (service == null) {
                     // Jika service tidak ditemukan, buat dummy service
                     service = new LaundryService(serviceId, "Unknown Service", 0, 0);
@@ -182,9 +182,9 @@ public class OrderDatabase {
                 boolean antarJemput = rs.getBoolean("antar_jemput");
 
                 // Load customer dari database
-                Customer customer = customerDatabase.getCustomerById(customerId);
+                Customer customer = CustomerDatabase.getCustomerById(customerId);
                 // Load service dari database
-                LaundryService service = serviceDatabase.getServiceById(serviceId);
+                LaundryService service = ServiceDatabase.getServiceById(serviceId);
 
                 if (customer != null && service != null) {
                     Order order = new Order(idOrder, customer, service, berat, antarJemput);

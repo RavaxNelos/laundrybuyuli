@@ -6,11 +6,12 @@ import java.util.ArrayList;
 import javax.swing.*;
 import main.*;
 import model.*;
-public class adminLoginPanel extends JPanel {
 
-    private appData data;
+public class AdminLoginPanel extends JPanel {
 
-    public adminLoginPanel(appData data) {
+    private AppData data;
+
+    public AdminLoginPanel(AppData data) {
         this.data = data;
         ArrayList<Admin> admins = data.admins;
         Admin currentAdmin = data.currentAdmin;
@@ -51,7 +52,7 @@ public class adminLoginPanel extends JPanel {
         gbc.gridy = 3;
         add(loginButton, gbc);
 
-        JButton exitButton = new JButton("Keluar");
+        JButton exitButton = new JButton("Exit");
         gbc.gridx = 1;
         gbc.gridy = 3;
         add(exitButton, gbc);
@@ -59,12 +60,12 @@ public class adminLoginPanel extends JPanel {
         loginButton.addActionListener(e -> {
             String nameLogin = nameField.getText();
             String passLogin = new String(passField.getPassword());
-            Admin logAdmin = adminDatabase.validateLoginByNama(nameLogin, passLogin);
+            Admin logAdmin = AdminDatabase.validateLoginByNama(nameLogin, passLogin);
             if (logAdmin != null) {
                 data.currentAdmin = logAdmin;
                 JOptionPane.showMessageDialog(this, "Berhasil Login sebagai Admin!");
                 // Pindah ke panel admin utama
-                guiMenuAdmin.showAdminMainPanel();
+                MainMenuAdmin.showAdminMainPanel();
             } else {
                 JOptionPane.showMessageDialog(this, "Nama atau password salah!", "Error", JOptionPane.ERROR_MESSAGE);
             }

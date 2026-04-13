@@ -8,11 +8,11 @@ import javax.swing.table.DefaultTableModel;
 import main.*;
 import model.*;
 
-public class menuTampilkan extends JPanel {
+public class UserTampilkanPanel extends JPanel {
 
-    private appData data;
+    private AppData data;
 
-    public menuTampilkan(appData data) {
+    public UserTampilkanPanel(AppData data) {
         this.data = data;
         // Refresh orders dari database
         data.orders = OrderDatabase.getAllOrders();
@@ -95,7 +95,7 @@ public class menuTampilkan extends JPanel {
         gbc.weighty = 0;
         add(btnPanel, gbc);
         backButton.addActionListener(e -> {
-            guiMenuPembeli.showDashboardPanel();
+            MainMenuPembeli.showDashboardPanel();
         });
 
     }

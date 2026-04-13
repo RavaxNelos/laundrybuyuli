@@ -8,11 +8,11 @@ import javax.swing.table.DefaultTableModel;
 import main.*;
 import model.*;
 
-public class menuPesan extends JPanel {
+public class UserPesanPanel extends JPanel {
 
-    private appData data;
+    private AppData data;
 
-    public menuPesan(appData data) {
+    public UserPesanPanel(AppData data) {
         this.data = data;
         // Load orders dari database menggunakan OrderDatabase
         data.orders = OrderDatabase.getAllOrders();
@@ -104,7 +104,7 @@ public class menuPesan extends JPanel {
         gbc.gridwidth = 2;
         add(btnPanel, gbc);
         backButton.addActionListener(e -> {
-            guiMenuPembeli.showDashboardPanel();
+            MainMenuPembeli.showDashboardPanel();
         });
         pesanButton.addActionListener(e -> {
             String idService = idServiceField.getText().trim();
@@ -162,10 +162,10 @@ public class menuPesan extends JPanel {
             System.out.println("Pesanan dibuat oleh " + currentUser.nama + "ID :" + currentUser.id);
 
             // Pastikan customer sudah tersimpan di database
-            Customer existingCustomer = customerDatabase.getCustomerById(currentUser.id);
+            Customer existingCustomer = CustomerDatabase.getCustomerById(currentUser.id);
             if (existingCustomer == null) {
                 // Jika customer belum ada, simpan ke database
-                boolean customerSaved = customerDatabase.saveCustomer(currentUser);
+                boolean customerSaved = CustomerDatabase.saveCustomer(currentUser);
                 if (!customerSaved) {
                     JOptionPane.showMessageDialog(this, "Gagal menyimpan data customer ke database!");
                     return;
@@ -181,7 +181,7 @@ public class menuPesan extends JPanel {
             boolean saved = OrderDatabase.saveOrder(newOrder);
             if (saved) {
                 JOptionPane.showMessageDialog(this, pesan);
-                guiMenuPembeli.showDashboardPanel();
+                MainMenuPembeli.showDashboardPanel();
             } else {
                 JOptionPane.showMessageDialog(this, "Gagal menyimpan pesanan ke database!");
                 data.orders.remove(newOrder); // Hapus dari memory jika gagal simpan

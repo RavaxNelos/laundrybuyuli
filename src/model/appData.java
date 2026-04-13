@@ -1,7 +1,8 @@
 package model;
+
 import java.util.ArrayList;
 
-public class appData {
+public class AppData {
 
     public ArrayList<Customer> customers = new ArrayList<>();
     public ArrayList<Order> orders = new ArrayList<>();

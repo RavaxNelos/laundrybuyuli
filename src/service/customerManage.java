@@ -157,7 +157,7 @@ public class customerManage {
         return null; // login gagal
     }
 
-    public static void saveAllData(appData data) {
+    public static void saveAllData(AppData data) {
         // Simpan semua order ke file, gunakan updateFileOrder untuk menimpa file lama
         updateFileOrder(data.orders);
     }

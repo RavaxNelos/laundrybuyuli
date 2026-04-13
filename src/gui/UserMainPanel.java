@@ -6,11 +6,11 @@ import javax.swing.*;
 import main.*;
 import model.*;
 
-public class dashboardPanel extends JPanel {
+public class UserMainPanel extends JPanel {
 
-    private appData data;
+    private AppData data;
 
-    public dashboardPanel(appData data) {
+    public UserMainPanel(AppData data) {
         this.data = data;
         Customer currentUser = data.currentUser;
         ArrayList<Order> orders = data.orders;
@@ -56,7 +56,7 @@ public class dashboardPanel extends JPanel {
         gbc.anchor = GridBagConstraints.CENTER;
         card.add(btnPanel, gbc);
         JPanel logoutPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 5));
-        JButton logoutButton = new JButton("Log Out");
+        JButton logoutButton = new JButton("Logout");
 
         logoutPanel.add(logoutButton);
 
@@ -69,10 +69,10 @@ public class dashboardPanel extends JPanel {
         add(card);
 
         pesanButton.addActionListener(e -> {
-            guiMenuPembeli.showMenuPesan();
+            MainMenuPembeli.showMenuPesan();
         });
         lihatPesanan.addActionListener(e -> {
-            guiMenuPembeli.showMenuTampilkan();
+            MainMenuPembeli.showMenuTampilkan();
         });
         confirmButton.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "Fitur Konfirmasi Pembayaran belum tersedia.");
@@ -80,7 +80,7 @@ public class dashboardPanel extends JPanel {
         logoutButton.addActionListener(e -> {
             int confirm = JOptionPane.showConfirmDialog(this, "Apakah Anda yakin ingin logout?", "Konfirmasi Logout", JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
-                guiMenuPembeli.showLoginPanel();
+                MainMenuPembeli.showLoginPanel();
             }
         });
 

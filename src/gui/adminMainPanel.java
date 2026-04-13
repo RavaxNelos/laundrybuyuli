@@ -1,15 +1,16 @@
 package gui;
+
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
 import main.*;
 import model.*;
 
-public class adminMainPanel extends JPanel {
+public class AdminMainPanel extends JPanel {
 
-    private appData data;
+    private AppData data;
 
-    public adminMainPanel(appData data) {
+    public AdminMainPanel(AppData data) {
         this.data = data;
         Admin currentAdmin = data.currentAdmin;
         ArrayList<Customer> customers = data.customers;
@@ -46,7 +47,7 @@ public class adminMainPanel extends JPanel {
         add(logoutButton, gbc);
 
         manageCustomersButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Fitur Kelola Pelanggan belum tersedia.");
+            MainMenuAdmin.showAdminKelolaPelangganPanel();
         });
         manageOrdersButton.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "Fitur Kelola Pesanan belum tersedia.");
@@ -54,7 +55,7 @@ public class adminMainPanel extends JPanel {
         logoutButton.addActionListener(e -> {
             int confirm = JOptionPane.showConfirmDialog(this, "Apakah Anda yakin ingin logout?", "Konfirmasi Logout", JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
-                guiMenuAdmin.showAdminLoginPanel();
+                MainMenuAdmin.showAdminLoginPanel();
             }
         });
     }

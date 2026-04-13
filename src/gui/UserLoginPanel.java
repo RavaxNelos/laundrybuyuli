@@ -7,11 +7,11 @@ import javax.swing.*;
 import main.*;
 import model.*;
 
-public class loginPanel extends JPanel {
+public class UserLoginPanel extends JPanel {
 
-    private appData data;
+    private AppData data;
 
-    public loginPanel(appData data) {
+    public UserLoginPanel(AppData data) {
         this.data = data;
         Customer currentUser = data.currentUser;
         ArrayList<Order> orders = data.orders;
@@ -98,17 +98,17 @@ public class loginPanel extends JPanel {
             String passLogin = new String(passField.getPassword());
 
             // Validasi login menggunakan database (berdasarkan nama customer)
-            Customer loginUser = customerDatabase.validateLoginByName(namaLogin, passLogin);
+            Customer loginUser = CustomerDatabase.validateLoginByName(namaLogin, passLogin);
             if (loginUser != null) {
                 JOptionPane.showMessageDialog(this, "Berhasil Login sebagai " + loginUser.nama);
                 data.currentUser = loginUser;
-                guiMenuPembeli.showDashboardPanel();
+                MainMenuPembeli.showDashboardPanel();
             } else {
                 JOptionPane.showMessageDialog(this, "Login Gagal! Periksa nama dan password.");
             }
         });
         registerButton.addActionListener(e -> {
-            guiMenuPembeli.showRegisterPanel();
+            MainMenuPembeli.showRegisterPanel();
         });
 
     }

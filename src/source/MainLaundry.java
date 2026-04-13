@@ -7,8 +7,8 @@ public class MainLaundry { // class utama program
         Scanner sc = new Scanner(System.in); // membuat object Scanner untuk input
         
         // Load data dari database MySQL
-        ArrayList<Customer> customers = customerDatabase.getAllCustomers(); // load customer dari DB
-        ArrayList<LaundryService> services = serviceDatabase.getAllServices(); // load service dari DB
+        ArrayList<Customer> customers = CustomerDatabase.getAllCustomers(); // load customer dari DB
+        ArrayList<LaundryService> services = ServiceDatabase.getAllServices(); // load service dari DB
         ArrayList<Order> orders = OrderDatabase.getAllOrders(); // load orders dari DB
 
         // membuat object Admin (inherit dari User)
@@ -59,7 +59,7 @@ public class MainLaundry { // class utama program
 
                 case 2:
                     // Reload customer dari database untuk memastikan data terbaru
-                    customers = customerDatabase.getAllCustomers();
+                    customers = CustomerDatabase.getAllCustomers();
 
                     // cek list customer
                     if (customers.isEmpty()) {

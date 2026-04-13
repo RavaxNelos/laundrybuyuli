@@ -10,9 +10,9 @@ public class TestDatabaseConnection {
             System.out.println("✓ Database connection successful!");
 
             // Test ambil semua data dari database
-            appData data = new appData();
-            data.customers = customerDatabase.getAllCustomers();
-            data.services = serviceDatabase.getAllServices();
+            AppData data = new AppData();
+            data.customers = CustomerDatabase.getAllCustomers();
+            data.services = ServiceDatabase.getAllServices();
 
             System.out.println("Loading orders from database...");
             data.orders = OrderDatabase.getAllOrders();

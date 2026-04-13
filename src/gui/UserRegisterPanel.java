@@ -6,11 +6,11 @@ import javax.swing.*;
 import main.*;
 import model.*;
 
-public class registerPanel extends JPanel {
+public class UserRegisterPanel extends JPanel {
 
-    private appData data;
+    private AppData data;
 
-    public registerPanel(appData data) {
+    public UserRegisterPanel(AppData data) {
         this.data = data;
         Customer currentUser = data.currentUser;
         setLayout(new GridBagLayout());
@@ -89,7 +89,7 @@ public class registerPanel extends JPanel {
                 Customer cust = new Customer(regID, nameReg, noReg, alamat, passReg);
 
                 // Simpan customer baru ke database
-                boolean saved = customerDatabase.saveCustomer(cust);
+                boolean saved = CustomerDatabase.saveCustomer(cust);
                 if (!saved) {
                     JOptionPane.showMessageDialog(this, "Gagal menyimpan customer ke database!");
                     return;
@@ -99,7 +99,7 @@ public class registerPanel extends JPanel {
                 data.customers.add(cust);
             } while (false);
             JOptionPane.showMessageDialog(null, "Registrasi berhasil!");
-            guiMenuPembeli.showLoginPanel(); // kembali ke login panel setelah registrasi
+            MainMenuPembeli.showLoginPanel(); // kembali ke login panel setelah registrasi
         });
     }
 

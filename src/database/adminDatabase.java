@@ -1,10 +1,10 @@
 package database;
+
 import java.sql.*;
 import java.util.ArrayList;
 import model.*;
-import service.*;
-import utils.*;
-public class adminDatabase {
+
+public class AdminDatabase {
 
     private static final String URL = "jdbc:mysql://localhost:3307/laundry_data";
     private static final String USER = "root"; // ganti dengan username MySQL Anda

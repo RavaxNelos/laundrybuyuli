@@ -2,7 +2,7 @@ package database;
 import java.sql.*;
 import java.util.ArrayList;
 import model.*;
-public class serviceDatabase {
+public class ServiceDatabase {
 
     // Database connection details
     private static final String URL = "jdbc:mysql://localhost:3307/laundry_data";
