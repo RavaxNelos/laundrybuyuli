@@ -1,7 +1,7 @@
-
+package service;
 import java.util.ArrayList;
 import java.util.List;
-
+import model.*;
 public class customerManage {
 
     public static String centerText(String text, int width) {

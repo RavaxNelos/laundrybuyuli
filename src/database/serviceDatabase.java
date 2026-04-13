@@ -1,6 +1,7 @@
+package database;
 import java.sql.*;
 import java.util.ArrayList;
-
+import model.*;
 public class serviceDatabase {
 
     // Database connection details
@@ -47,7 +48,6 @@ public class serviceDatabase {
     // =================================================================
     // SERVICE CRUD METHODS
     // =================================================================
-
     // Method untuk menyimpan service ke database
     public static boolean saveService(LaundryService service) {
         String sql = "INSERT INTO service (service_id, nama_service, harga_per_kg, estimasi) VALUES (?, ?, ?, ?)";

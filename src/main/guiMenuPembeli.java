@@ -1,9 +1,15 @@
+package main;
 
+import database.*;
+import gui.*;
 import javax.swing.*;
+import model.*;
+
 public class guiMenuPembeli {
 
     static JFrame frame = new JFrame("Laundry Bu Yuli");
     static appData data = new appData();
+
     public static void main(String[] args) {
         // Load customer dan service dari database
         data.customers = customerDatabase.getAllCustomers();
@@ -35,6 +41,7 @@ public class guiMenuPembeli {
         frame.revalidate();
         frame.repaint();
     }
+
     public static void showMenuPesan() {
         menuPesan panel = new menuPesan(data);
         frame.getContentPane().removeAll();
@@ -42,6 +49,7 @@ public class guiMenuPembeli {
         frame.revalidate();
         frame.repaint();
     }
+
     public static void showMenuTampilkan() {
         menuTampilkan panel = new menuTampilkan(data);
         frame.getContentPane().removeAll();

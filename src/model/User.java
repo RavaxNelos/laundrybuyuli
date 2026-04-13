@@ -1,8 +1,10 @@
+package model;
+
 public class User { // class induk (parent) untuk Admin, Courier, Customer
 
-    protected String id; // menyimpan ID user (bisa admin, kurir, atau customer)
-    protected String nama; // menyimpan nama user
-    protected String noHp; // menyimpan nomor HP user
+    public String id; // menyimpan ID user (bisa admin, kurir, atau customer)
+    public String nama; // menyimpan nama user
+    public String noHp; // menyimpan nomor HP user
 
     // constructor untuk mengisi data user saat object dibuat
     public User(String id, String nama, String noHp) {

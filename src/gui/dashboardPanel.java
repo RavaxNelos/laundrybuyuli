@@ -1,7 +1,10 @@
+package gui;
 
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
+import main.*;
+import model.*;
 
 public class dashboardPanel extends JPanel {
 
@@ -42,7 +45,7 @@ public class dashboardPanel extends JPanel {
         JButton pesanButton = new JButton("Pesan Laundry");
         JButton lihatPesanan = new JButton("Lihat Pesanan");
         JButton confirmButton = new JButton("Bayar Pesanan");
-        
+
         btnPanel.add(pesanButton);
         btnPanel.add(lihatPesanan);
         btnPanel.add(confirmButton);

@@ -1,8 +1,10 @@
-import java.util.ArrayList; 
+package model;
+import java.util.ArrayList;
 
 public class Customer extends User { // Customer mewarisi User
-    String alamat, password; // menyimpan alamat customer
-    
+
+    public String alamat, password; // menyimpan alamat customer
+
     ArrayList<Order> riwayat = new ArrayList<>(); // menyimpan riwayat order customer
 
     // constructor untuk inisialisasi object Customer

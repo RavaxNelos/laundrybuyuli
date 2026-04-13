@@ -1,7 +1,15 @@
+package gui;
+
+import database.*;
 import java.awt.*;
 import javax.swing.*;
+import main.*;
+import model.*;
+
 public class registerPanel extends JPanel {
+
     private appData data;
+
     public registerPanel(appData data) {
         this.data = data;
         Customer currentUser = data.currentUser;
@@ -79,17 +87,17 @@ public class registerPanel extends JPanel {
                 String regID = "CUST" + nextNum;
 
                 Customer cust = new Customer(regID, nameReg, noReg, alamat, passReg);
-                
+
                 // Simpan customer baru ke database
                 boolean saved = customerDatabase.saveCustomer(cust);
                 if (!saved) {
                     JOptionPane.showMessageDialog(this, "Gagal menyimpan customer ke database!");
                     return;
                 }
-                
+
                 // Tambah ke ArrayList juga agar langsung bisa dipakai
                 data.customers.add(cust);
-            } while (false); 
+            } while (false);
             JOptionPane.showMessageDialog(null, "Registrasi berhasil!");
             guiMenuPembeli.showLoginPanel(); // kembali ke login panel setelah registrasi
         });

@@ -1,7 +1,9 @@
-
+package gui;
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
+import main.*;
+import model.*;
 
 public class adminMainPanel extends JPanel {
 

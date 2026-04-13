@@ -1,10 +1,11 @@
+package model;
 
 public class LaundryService {
 
-    String idService;
-    String namaLayanan;
-    double hargaPerKg;
-    int estimasiHari;
+    public String idService;
+    public String namaLayanan;
+    public double hargaPerKg;
+    public int estimasiHari;
 
     // Constructor
     public LaundryService(String idService, String namaLayanan, double hargaPerKg, int estimasiHari) {

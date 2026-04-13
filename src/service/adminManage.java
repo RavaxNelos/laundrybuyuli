@@ -1,11 +1,11 @@
+package service;
 
 import java.util.ArrayList;
+import model.*;
 
 public class adminManage {
 
     // method untuk membaca data customer dari file
-    
-
     // method untuk membaca data order dari file
     static void lihatOrderDariFile() {
         try {

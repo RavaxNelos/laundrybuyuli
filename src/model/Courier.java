@@ -1,6 +1,8 @@
+package model;
 import java.util.ArrayList;
 
 public class Courier extends User {// Courier mewarisi User
+
     ArrayList<Order> orders;
 
     // constructor Courier

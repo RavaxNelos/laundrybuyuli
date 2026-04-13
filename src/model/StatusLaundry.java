@@ -1,3 +1,5 @@
+package model;
+
 public enum StatusLaundry { // enum untuk menyimpan daftar status proses laundry
 
     DITERIMA, // status awal saat order baru dibuat / diterima admin

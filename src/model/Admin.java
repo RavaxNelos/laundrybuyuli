@@ -1,10 +1,13 @@
+package model;
 import java.util.ArrayList;
 
 public class Admin extends User {// Admin mewarisi User
+
     ArrayList<Customer> customers;
     ArrayList<Order> orders;
-    String password; // menyimpan password admin
+    public String password; // menyimpan password admin
     // constructor Admin
+
     public Admin(String id, String nama, String noHp, String password,
             ArrayList<Customer> customers, ArrayList<Order> orders) {
         super(id, nama, noHp); // memanggil constructor User

@@ -1,7 +1,9 @@
-
+package database;
 import java.sql.*;
 import java.util.ArrayList;
-
+import model.*;
+import service.*;
+import utils.*;
 public class adminDatabase {
 
     private static final String URL = "jdbc:mysql://localhost:3307/laundry_data";

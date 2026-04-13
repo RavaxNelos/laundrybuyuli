@@ -1,9 +1,15 @@
+package gui;
 
+import database.*;
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
+import main.*;
+import model.*;
 public class adminLoginPanel extends JPanel {
+
     private appData data;
+
     public adminLoginPanel(appData data) {
         this.data = data;
         ArrayList<Admin> admins = data.admins;
@@ -49,7 +55,7 @@ public class adminLoginPanel extends JPanel {
         gbc.gridx = 1;
         gbc.gridy = 3;
         add(exitButton, gbc);
-        
+
         loginButton.addActionListener(e -> {
             String nameLogin = nameField.getText();
             String passLogin = new String(passField.getPassword());

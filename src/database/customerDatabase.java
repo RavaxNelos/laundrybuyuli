@@ -1,6 +1,7 @@
+package database;
 import java.sql.*;
 import java.util.ArrayList;
-
+import model.*;
 public class customerDatabase {
 
     // Database connection details
@@ -47,7 +48,6 @@ public class customerDatabase {
     // =================================================================
     // CUSTOMER CRUD METHODS
     // =================================================================
-
     // Method untuk menyimpan customer ke database
     public static boolean saveCustomer(Customer customer) {
         String sql = "INSERT INTO customer (customer_id, nama_customer, phone, alamat, password) VALUES (?, ?, ?, ?, ?)";

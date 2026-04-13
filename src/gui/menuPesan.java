@@ -1,8 +1,12 @@
+package gui;
 
+import database.*;
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import main.*;
+import model.*;
 
 public class menuPesan extends JPanel {
 
@@ -156,7 +160,7 @@ public class menuPesan extends JPanel {
                     + "Antar/Jemput: " + (antarJemput ? "Ya" : "Tidak") + "\n"
                     + "Total Harga: Rp" + hargaTotal;
             System.out.println("Pesanan dibuat oleh " + currentUser.nama + "ID :" + currentUser.id);
-            
+
             // Pastikan customer sudah tersimpan di database
             Customer existingCustomer = customerDatabase.getCustomerById(currentUser.id);
             if (existingCustomer == null) {
@@ -167,7 +171,7 @@ public class menuPesan extends JPanel {
                     return;
                 }
             }
-            
+
             int nextOrderNum = data.orders.isEmpty() ? 1 : data.orders.size() + 1;
             String orderID = "ORD" + nextOrderNum;
             Order newOrder = new Order(orderID, currentUser, layananDipilih, berat, antarJemput);
