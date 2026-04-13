@@ -63,6 +63,7 @@ public class menuPesan extends JPanel {
         gbc.weighty = 1.0;
         add(scrollPane, gbc);
         JLabel pilihLabel = new JLabel("Pilih ID Service:");
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.gridwidth = 1;
@@ -87,11 +88,20 @@ public class menuPesan extends JPanel {
         gbc.gridx = 1;
         gbc.gridy = 4;
         add(antarJemputField, gbc);
-        JButton pesanButton = new JButton("Pesan");
+        JPanel btnPanel = new JPanel(new FlowLayout());
+        JButton backButton = new JButton("Kembali");
+        JButton pesanButton = new JButton(" Pesan ");
+        btnPanel.add(backButton);
+        btnPanel.add(pesanButton);
+
+        gbc.fill = GridBagConstraints.NONE;
         gbc.gridx = 0;
         gbc.gridy = 5;
         gbc.gridwidth = 2;
-        add(pesanButton, gbc);
+        add(btnPanel, gbc);
+        backButton.addActionListener(e -> {
+            guiMenuPembeli.showDashboardPanel();
+        });
         pesanButton.addActionListener(e -> {
             String idService = idServiceField.getText().trim();
             String beratText = beratField.getText().trim();
@@ -167,7 +177,7 @@ public class menuPesan extends JPanel {
             boolean saved = OrderDatabase.saveOrder(newOrder);
             if (saved) {
                 JOptionPane.showMessageDialog(this, pesan);
-                menuPembeliGUI.showDashboardPanel();
+                guiMenuPembeli.showDashboardPanel();
             } else {
                 JOptionPane.showMessageDialog(this, "Gagal menyimpan pesanan ke database!");
                 data.orders.remove(newOrder); // Hapus dari memory jika gagal simpan

@@ -2,9 +2,11 @@
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
+
 public class dashboardPanel extends JPanel {
 
     private appData data;
+
     public dashboardPanel(appData data) {
         this.data = data;
         Customer currentUser = data.currentUser;
@@ -13,43 +15,61 @@ public class dashboardPanel extends JPanel {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
-        JLabel titleLabel = new JLabel("Dashboard Laundry Bu Yuli");
+
+        setLayout(new BorderLayout());
+        JPanel card = new JPanel(new GridBagLayout());
+        card.setBorder(BorderFactory.createTitledBorder("Login Page"));
+
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        JLabel titleLabel = new JLabel("Dashboard Laundry Bu Yuli", JLabel.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 2;
-        add(titleLabel, gbc);
-        JLabel welcomeLabel = new JLabel("Selamat datang di dashboard! " + currentUser.nama);
+        gbc.anchor = GridBagConstraints.CENTER;
+        card.add(titleLabel, gbc);
+        // ===== TITLE =====
+        JLabel welcomeLabel = new JLabel("Selamat datang di dashboard ! " + currentUser.nama, JLabel.CENTER);
         welcomeLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 2;
-        add(welcomeLabel, gbc);
+        gbc.anchor = GridBagConstraints.CENTER;
+        card.add(welcomeLabel, gbc);
+
+        JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 5));
         JButton pesanButton = new JButton("Pesan Laundry");
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        gbc.gridwidth = 1;
-        add(pesanButton, gbc);
         JButton lihatPesanan = new JButton("Lihat Pesanan");
-        gbc.gridx = 1;
-        gbc.gridy = 2;
-        add(lihatPesanan, gbc);
-        JButton confirmButton = new JButton("Konfirmasi Pembayaran");
+        JButton confirmButton = new JButton("Bayar Pesanan");
+        
+        btnPanel.add(pesanButton);
+        btnPanel.add(lihatPesanan);
+        btnPanel.add(confirmButton);
+
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.gridwidth = 2;
-        add(confirmButton, gbc);
-        JButton logoutButton = new JButton("Logout");
+        gbc.anchor = GridBagConstraints.CENTER;
+        card.add(btnPanel, gbc);
+        JPanel logoutPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 5));
+        JButton logoutButton = new JButton("Log Out");
+
+        logoutPanel.add(logoutButton);
+
         gbc.gridx = 0;
         gbc.gridy = 4;
         gbc.gridwidth = 2;
-        add(logoutButton, gbc);
+        gbc.anchor = GridBagConstraints.CENTER;
+        card.add(logoutPanel, gbc);
+
+        add(card);
 
         pesanButton.addActionListener(e -> {
-            menuPembeliGUI.showMenuPesan();
+            guiMenuPembeli.showMenuPesan();
         });
         lihatPesanan.addActionListener(e -> {
-            menuPembeliGUI.showMenuTampilkan();
+            guiMenuPembeli.showMenuTampilkan();
         });
         confirmButton.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "Fitur Konfirmasi Pembayaran belum tersedia.");
@@ -57,7 +77,7 @@ public class dashboardPanel extends JPanel {
         logoutButton.addActionListener(e -> {
             int confirm = JOptionPane.showConfirmDialog(this, "Apakah Anda yakin ingin logout?", "Konfirmasi Logout", JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
-                menuPembeliGUI.showLoginPanel();
+                guiMenuPembeli.showLoginPanel();
             }
         });
 

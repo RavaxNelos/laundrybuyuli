@@ -12,7 +12,7 @@ public class MainLaundry { // class utama program
         ArrayList<Order> orders = OrderDatabase.getAllOrders(); // load orders dari DB
 
         // membuat object Admin (inherit dari User)
-        Admin admin = new Admin("ADM1", "Admin Utama", "08123456789", customers, orders);
+        Admin admin = new Admin("ADM1", "Admin Utama", "08123456789", "admin123", customers, orders);
 
         // membuat object Courier (inherit dari User)
         Courier kurir = new Courier("CR1", "Kurir 1", "08129876543", orders);

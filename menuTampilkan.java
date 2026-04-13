@@ -83,17 +83,16 @@ public class menuTampilkan extends JPanel {
             add(new JLabel("Tidak ada pesanan untuk user ini."), gbc);
         }
         JButton backButton = new JButton("Kembali ke Menu Utama");
-        backButton.addActionListener(e -> {
-            JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-            topFrame.getContentPane().removeAll();
-            topFrame.getContentPane().add(new dashboardPanel(data));
-            topFrame.revalidate();
-            topFrame.repaint();
-        });
-        gbc.gridx = 0;
+        JPanel btnPanel = new JPanel();
+        btnPanel.add(backButton);
+
+        gbc.fill = GridBagConstraints.NONE;
         gbc.gridy = 4;
-        gbc.gridwidth = 2;
-        add(backButton, gbc);
+        gbc.weighty = 0;
+        add(btnPanel, gbc);
+        backButton.addActionListener(e -> {
+            guiMenuPembeli.showDashboardPanel();
+        });
 
     }
 }

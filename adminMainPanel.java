@@ -52,7 +52,7 @@ public class adminMainPanel extends JPanel {
         logoutButton.addActionListener(e -> {
             int confirm = JOptionPane.showConfirmDialog(this, "Apakah Anda yakin ingin logout?", "Konfirmasi Logout", JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
-                menuAdminGUI.showAdminLoginPanel();
+                guiMenuAdmin.showAdminLoginPanel();
             }
         });
     }

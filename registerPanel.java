@@ -91,7 +91,7 @@ public class registerPanel extends JPanel {
                 data.customers.add(cust);
             } while (false); 
             JOptionPane.showMessageDialog(null, "Registrasi berhasil!");
-            menuPembeliGUI.showLoginPanel(); // kembali ke login panel setelah registrasi
+            guiMenuPembeli.showLoginPanel(); // kembali ke login panel setelah registrasi
         });
     }
 

@@ -58,7 +58,7 @@ public class adminLoginPanel extends JPanel {
                 data.currentAdmin = logAdmin;
                 JOptionPane.showMessageDialog(this, "Berhasil Login sebagai Admin!");
                 // Pindah ke panel admin utama
-                menuAdminGUI.showAdminMainPanel();
+                guiMenuAdmin.showAdminMainPanel();
             } else {
                 JOptionPane.showMessageDialog(this, "Nama atau password salah!", "Error", JOptionPane.ERROR_MESSAGE);
             }

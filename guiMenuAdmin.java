@@ -1,5 +1,5 @@
 import javax.swing.*;
-public class menuAdminGUI {
+public class guiMenuAdmin {
     static JFrame frame = new JFrame("Laundry Bu Yuli - Admin");
     static appData data = new appData();
     public static void main(String[] args) {
