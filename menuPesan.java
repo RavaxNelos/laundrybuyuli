@@ -167,7 +167,7 @@ public class menuPesan extends JPanel {
             boolean saved = OrderDatabase.saveOrder(newOrder);
             if (saved) {
                 JOptionPane.showMessageDialog(this, pesan);
-                tesGUI.showDashboardPanel();
+                menuPembeliGUI.showDashboardPanel();
             } else {
                 JOptionPane.showMessageDialog(this, "Gagal menyimpan pesanan ke database!");
                 data.orders.remove(newOrder); // Hapus dari memory jika gagal simpan

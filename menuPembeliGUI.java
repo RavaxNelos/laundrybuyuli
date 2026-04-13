@@ -1,6 +1,6 @@
 
 import javax.swing.*;
-public class tesGUI {
+public class menuPembeliGUI {
 
     static JFrame frame = new JFrame("Laundry Bu Yuli");
     static appData data = new appData();

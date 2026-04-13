@@ -2,19 +2,17 @@
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
-
-public class loginPanel extends JPanel {
+public class adminLoginPanel extends JPanel {
     private appData data;
-    public loginPanel(appData data) {
+    public adminLoginPanel(appData data) {
         this.data = data;
-        Customer currentUser = data.currentUser;
-        ArrayList<Order> orders = data.orders;
-        ArrayList<LaundryService> services = data.services;
+        ArrayList<Admin> admins = data.admins;
+        Admin currentAdmin = data.currentAdmin;
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
 
-        JLabel titleLabel = new JLabel("Login Dashboard Laundry Bu Yuli");
+        JLabel titleLabel = new JLabel("Admin Login - Laundry Bu Yuli");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -47,17 +45,24 @@ public class loginPanel extends JPanel {
         gbc.gridy = 3;
         add(loginButton, gbc);
 
-        JButton registerButton = new JButton("Register");
+        JButton exitButton = new JButton("Keluar");
         gbc.gridx = 1;
         gbc.gridy = 3;
-        add(registerButton, gbc);
-
-        JButton exitButton = new JButton("Keluar");
-        gbc.gridx = 0;
-        gbc.gridy = 4;
-        gbc.gridwidth = 2;
-        gbc.anchor = GridBagConstraints.CENTER;
         add(exitButton, gbc);
+        
+        loginButton.addActionListener(e -> {
+            String nameLogin = nameField.getText();
+            String passLogin = new String(passField.getPassword());
+            Admin logAdmin = adminDatabase.validateLoginByNama(nameLogin, passLogin);
+            if (logAdmin != null) {
+                data.currentAdmin = logAdmin;
+                JOptionPane.showMessageDialog(this, "Berhasil Login sebagai Admin!");
+                // Pindah ke panel admin utama
+                menuAdminGUI.showAdminMainPanel();
+            } else {
+                JOptionPane.showMessageDialog(this, "Nama atau password salah!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
         exitButton.addActionListener(e -> {
             int confirm = JOptionPane.showConfirmDialog(this, "Apakah Anda yakin ingin keluar?", "Konfirmasi Keluar", JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
@@ -65,23 +70,5 @@ public class loginPanel extends JPanel {
             }
         });
 
-        loginButton.addActionListener(e -> {
-            String namaLogin = nameField.getText().trim();
-            String passLogin = new String(passField.getPassword());
-            
-            // Validasi login menggunakan database (berdasarkan nama customer)
-            Customer loginUser = customerDatabase.validateLoginByName(namaLogin, passLogin);
-            if (loginUser != null) {
-                JOptionPane.showMessageDialog(this, "Berhasil Login sebagai " + loginUser.nama);
-                data.currentUser = loginUser;
-                menuPembeliGUI.showDashboardPanel();
-            } else {
-                JOptionPane.showMessageDialog(this, "Login Gagal! Periksa nama dan password.");
-            }
-        });
-        registerButton.addActionListener(e -> {
-            menuPembeliGUI.showRegisterPanel();
-        });
     }
-
 }

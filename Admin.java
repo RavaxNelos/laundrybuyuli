@@ -3,11 +3,12 @@ import java.util.ArrayList;
 public class Admin extends User {// Admin mewarisi User
     ArrayList<Customer> customers;
     ArrayList<Order> orders;
-
+    String password; // menyimpan password admin
     // constructor Admin
-    public Admin(String id, String nama, String noHp,
+    public Admin(String id, String nama, String noHp, String password,
             ArrayList<Customer> customers, ArrayList<Order> orders) {
         super(id, nama, noHp); // memanggil constructor User
+        this.password = password; // inisialisasi password admin
         this.customers = customers; // inisialisasi data customer
         this.orders = orders; // inisialisasi data order
     }
