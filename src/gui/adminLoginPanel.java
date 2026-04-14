@@ -25,38 +25,48 @@ public class AdminLoginPanel extends JPanel {
         gbc.gridy = 0;
         gbc.gridwidth = 2;
         add(titleLabel, gbc);
+        setLayout(new BorderLayout());
 
+// PANEL UTAMA (CARD)
+        JPanel card = new JPanel(new GridBagLayout());
+        card.setBorder(BorderFactory.createTitledBorder("Login Page"));
+
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         JLabel nameLabel = new JLabel("Nama:");
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 1;
-        add(nameLabel, gbc);
+        card.add(nameLabel, gbc);
 
         JTextField nameField = new JTextField(15);
         gbc.gridx = 1;
         gbc.gridy = 1;
-        add(nameField, gbc);
+        card.add(nameField, gbc);
 
         JLabel passLabel = new JLabel("Password:");
         gbc.gridx = 0;
         gbc.gridy = 2;
-        add(passLabel, gbc);
+        card.add(passLabel, gbc);
 
         JPasswordField passField = new JPasswordField(15);
         gbc.gridx = 1;
         gbc.gridy = 2;
-        add(passField, gbc);
+        card.add(passField, gbc);
+        JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
 
         JButton loginButton = new JButton("Login");
         gbc.gridx = 0;
         gbc.gridy = 3;
-        add(loginButton, gbc);
+        btnPanel.add(loginButton, gbc);
 
         JButton exitButton = new JButton("Exit");
         gbc.gridx = 1;
         gbc.gridy = 3;
-        add(exitButton, gbc);
-
+        btnPanel.add(exitButton);
+        btnPanel.add(exitButton, gbc);
+        card.add(btnPanel, gbc);
+        add(card, BorderLayout.CENTER);
         loginButton.addActionListener(e -> {
             String nameLogin = nameField.getText();
             String passLogin = new String(passField.getPassword());

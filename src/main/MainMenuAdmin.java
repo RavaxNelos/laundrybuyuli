@@ -39,4 +39,19 @@ public class MainMenuAdmin {
         frame.revalidate();
         frame.repaint();
     }
+    public static void showAdminKelolaAddPelangganPanel() {
+        frame.setContentPane(new AdminKelolaAddPelanggan(data));
+        frame.revalidate();
+        frame.repaint();
+    }
+    public static void showAdminKelolaEditPelangganPanel() {
+        frame.setContentPane(new AdminKelolaEditPelanggan(data));
+        frame.revalidate();
+        frame.repaint();
+    }
+    public static void showAdminKelolaDelPelangganPanel() {
+        frame.setContentPane(new AdminKelolaDelPelanggan(data));
+        frame.revalidate();
+        frame.repaint();
+    }
 }
