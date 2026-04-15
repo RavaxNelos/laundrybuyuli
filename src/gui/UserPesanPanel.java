@@ -32,7 +32,7 @@ public class UserPesanPanel extends JPanel {
         add(titleLabel, gbc);
 
         String[] kolomOrder = {
-            "ID", "Layanan", "Harga per Kg"
+                "ID", "Layanan", "Harga per Kg"
         };
         DefaultTableModel model = new DefaultTableModel(kolomOrder, 0) {
             @Override
@@ -41,13 +41,13 @@ public class UserPesanPanel extends JPanel {
             }
         };
         if (services.isEmpty()) {
-            model.addRow(new Object[]{"-", "Tidak ada layanan tersedia", "-"});
+            model.addRow(new Object[] { "-", "Tidak ada layanan tersedia", "-" });
         } else {
             for (LaundryService o : services) {
                 Object[] row = {
-                    o.idService,
-                    o.namaLayanan,
-                    "Rp" + o.hargaPerKg
+                        o.idService,
+                        o.namaLayanan,
+                        "Rp" + o.hargaPerKg
                 };
                 model.addRow(row);
             }
@@ -72,10 +72,16 @@ public class UserPesanPanel extends JPanel {
         gbc.gridy = 2;
         gbc.gridwidth = 1;
         add(pilihLabel, gbc);
-        JTextField idServiceField = new JTextField(10);
+        JComboBox<String> serviceComboBox = new JComboBox<>();
+
+        // isi combo box dari data services
+        for (LaundryService ls : services) {
+            serviceComboBox.addItem(ls.idService + " - " + ls.namaLayanan);
+        }
+
         gbc.gridx = 1;
         gbc.gridy = 2;
-        add(idServiceField, gbc);
+        add(serviceComboBox, gbc);
         JLabel beratLabel = new JLabel("Berat (Kg):");
         gbc.gridx = 0;
         gbc.gridy = 3;
@@ -107,7 +113,14 @@ public class UserPesanPanel extends JPanel {
             MainMenuPembeli.showDashboardPanel();
         });
         pesanButton.addActionListener(e -> {
-            String idService = idServiceField.getText().trim();
+            String selectedService = (String) serviceComboBox.getSelectedItem();
+            if (selectedService == null) {
+                JOptionPane.showMessageDialog(this, "Pilih layanan terlebih dahulu!");
+                return;
+            }
+
+            // ambil ID service dari string (dipisah dengan " - ")
+            String idService = selectedService.split(" - ")[0];
             String beratText = beratField.getText().trim();
             String antarJemputText = antarJemputField.getText().trim();
 

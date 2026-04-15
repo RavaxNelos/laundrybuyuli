@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 import main.MainMenuAdmin;
 import model.*;
+import database.CustomerDatabase;
 
 public class AdminKelolaAddPelanggan extends JPanel {
 
@@ -77,7 +78,47 @@ public class AdminKelolaAddPelanggan extends JPanel {
         gbc.anchor = GridBagConstraints.CENTER;
         add(btnPanel, gbc);
         addButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Fitur tambah customer belum tersedia");
+            String nama = nameField.getText().trim();
+            String noHp = noField.getText().trim();
+            String alamat = alamatField.getText().trim();
+            String password = new String(passField.getPassword());
+            String confirmPassword = new String(confirmPassField.getPassword());
+
+            // VALIDASI
+            if (nama.isEmpty() || noHp.isEmpty() || alamat.isEmpty() || password.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Semua field harus diisi!");
+                return;
+            }
+
+            if (!password.equals(confirmPassword)) {
+                JOptionPane.showMessageDialog(this, "Password tidak cocok!");
+                return;
+            }
+
+            // BUAT ID CUSTOMER OTOMATIS
+            String idCustomer = CustomerDatabase.generateCustomerId();
+
+            // BUAT OBJECT CUSTOMER
+            Customer newCustomer = new Customer(idCustomer, nama, noHp, alamat, password);
+
+            // SIMPAN KE DATABASE
+            boolean saved = CustomerDatabase.saveCustomer(newCustomer);
+
+            if (saved) {
+                // simpan juga ke memory
+                data.customers.add(newCustomer);
+
+                JOptionPane.showMessageDialog(this, "Customer berhasil ditambahkan!");
+
+                // reset field
+                nameField.setText("");
+                noField.setText("");
+                alamatField.setText("");
+                passField.setText("");
+                confirmPassField.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this, "Gagal menyimpan ke database!");
+            }
         });
         backButton.addActionListener(e -> {
             MainMenuAdmin.showAdminKelolaPelangganPanel();

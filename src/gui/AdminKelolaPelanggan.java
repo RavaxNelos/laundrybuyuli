@@ -4,6 +4,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
+import database.CustomerDatabase;
 import main.MainMenuAdmin;
 import model.*;
 
@@ -13,6 +15,7 @@ public class AdminKelolaPelanggan extends JPanel {
 
     public AdminKelolaPelanggan(AppData data) {
         this.data = data;
+        data.customers = CustomerDatabase.getAllCustomers();
         ArrayList<Customer> customers = data.customers;
         ArrayList<Order> orders = data.orders;
         ArrayList<LaundryService> services = data.services;
@@ -26,18 +29,18 @@ public class AdminKelolaPelanggan extends JPanel {
         gbc.gridy = 0;
         gbc.gridwidth = 2;
         add(titleLabel, gbc);
-        DefaultTableModel model = new DefaultTableModel(new Object[]{"ID", "Nama", "Nomor HP", "Alamat"}, 0) {
+        DefaultTableModel model = new DefaultTableModel(new Object[] { "ID", "Nama", "Nomor HP", "Alamat" }, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
         for (Customer c : customers) {
-            model.addRow(new Object[]{
-                c.id,
-                c.nama,
-                c.noHp,
-                c.alamat
+            model.addRow(new Object[] {
+                    c.id,
+                    c.nama,
+                    c.noHp,
+                    c.alamat
             });
         }
 
@@ -74,14 +77,13 @@ public class AdminKelolaPelanggan extends JPanel {
         add(btnPanel, gbc);
 
         addButton.addActionListener(e -> {
-            MainMenuAdmin.showAdminKelolaAddPelangganPanel(); 
-            
+            MainMenuAdmin.showAdminKelolaAddPelangganPanel();
         });
         editButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Fitur Edit Pelanggan belum tersedia.");
+            MainMenuAdmin.showAdminKelolaEditPelangganPanel();
         });
         deleteButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Fitur Hapus Pelanggan belum tersedia.");
+            MainMenuAdmin.showAdminKelolaDelPelangganPanel();
         });
         backButton.addActionListener(e -> {
             MainMenuAdmin.showAdminMainPanel();
@@ -90,8 +92,9 @@ public class AdminKelolaPelanggan extends JPanel {
 
 }
 /*
-            JOptionPane.showMessageDialog(this, "Fitur Tambah Pelanggan belum tersedia.");
-            MainMenuAdmin.showAdminKelolaEditPelangganPanel();
-            MainMenuAdmin.showAdminKelolaDelPelangganPanel();
-            
-            */
+ * JOptionPane.showMessageDialog(this,
+ * "Fitur Tambah Pelanggan belum tersedia.");
+ * MainMenuAdmin.showAdminKelolaEditPelangganPanel();
+ * MainMenuAdmin.showAdminKelolaDelPelangganPanel();
+ * 
+ */

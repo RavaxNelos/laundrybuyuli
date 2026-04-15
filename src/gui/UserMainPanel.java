@@ -75,7 +75,7 @@ public class UserMainPanel extends JPanel {
             MainMenuPembeli.showMenuTampilkan();
         });
         confirmButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Fitur Konfirmasi Pembayaran belum tersedia.");
+            MainMenuPembeli.showMenuBayar();
         });
         logoutButton.addActionListener(e -> {
             int confirm = JOptionPane.showConfirmDialog(this, "Apakah Anda yakin ingin logout?", "Konfirmasi Logout", JOptionPane.YES_NO_OPTION);

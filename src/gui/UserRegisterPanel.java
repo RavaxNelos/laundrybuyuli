@@ -71,7 +71,7 @@ public class UserRegisterPanel extends JPanel {
         gbc.anchor = GridBagConstraints.CENTER;
         add(submitButton, gbc);
         JButton backButton = new JButton("Kembali");
-        gbc.gridx = 3;
+        gbc.gridx = 1;
         gbc.gridy = 6;
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.CENTER;
@@ -92,8 +92,7 @@ public class UserRegisterPanel extends JPanel {
                     return;
                 }
 
-                int nextNum = data.customers.isEmpty() ? 1 : data.customers.size() + 1;
-                String regID = "CUST" + nextNum;
+                String regID = CustomerDatabase.generateCustomerId();
 
                 Customer cust = new Customer(regID, nameReg, noReg, alamat, passReg);
 

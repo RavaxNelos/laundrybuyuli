@@ -7,7 +7,7 @@ import model.*;
 public class CustomerDatabase {
 
     // Database connection details
-    private static final String URL = "jdbc:mysql://localhost:3307/laundry_data";
+    private static final String URL = "jdbc:mysql://localhost:3306/laundry_data";
     private static final String USER = "root"; // ganti dengan username MySQL Anda
     private static final String PASSWORD = ""; // ganti dengan password MySQL Anda
 
@@ -74,9 +74,11 @@ public class CustomerDatabase {
     // Method untuk mengambil semua customer dari database
     public static ArrayList<Customer> getAllCustomers() {
         ArrayList<Customer> customers = new ArrayList<>();
-        String sql = "SELECT * FROM customer";
+        String sql = "SELECT * FROM customer ORDER BY CAST(SUBSTRING(customer_id, 5) AS UNSIGNED) ASC";
 
-        try (Connection conn = getConnection(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
+        try (Connection conn = getConnection();
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 String id = rs.getString("customer_id");
@@ -216,16 +218,37 @@ public class CustomerDatabase {
         return null;
     }
 
+    public static String generateCustomerId() {
+        String newId = "CUST1";
+
+        try (Connection conn = getConnection()) {
+            String sql = "SELECT MAX(CAST(SUBSTRING(customer_id, 5) AS UNSIGNED)) AS max_id FROM customer";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                int max = rs.getInt("max_id");
+                newId = "CUST" + (max + 1);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return newId;
+    }
+
     // Method untuk cek apakah customer ID sudah ada (untuk registrasi)
     public static boolean isCustomerIdExists(String customerId) {
-        String sql = "SELECT * FROM customer WHERE customer_id = ?";
+        String sql = "SELECT 1 FROM customer WHERE customer_id = ?";
 
-        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, customerId);
             ResultSet rs = stmt.executeQuery();
 
-            return rs.next(); // true jika ada, false jika tidak ada
+            return rs.next();
 
         } catch (SQLException e) {
             System.err.println("Error cek customer ID: " + e.getMessage());

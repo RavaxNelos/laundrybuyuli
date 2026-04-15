@@ -57,4 +57,11 @@ public class MainMenuPembeli {
         frame.revalidate();
         frame.repaint();
     }
+    public static void showMenuBayar() {
+        UserBayarPanel panel = new UserBayarPanel(data);
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(panel);
+        frame.revalidate();
+        frame.repaint();
+    }
 }
