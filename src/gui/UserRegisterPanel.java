@@ -70,6 +70,15 @@ public class UserRegisterPanel extends JPanel {
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.CENTER;
         add(submitButton, gbc);
+        JButton backButton = new JButton("Kembali");
+        gbc.gridx = 3;
+        gbc.gridy = 6;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        add(backButton, gbc);
+        backButton.addActionListener(e -> {
+            MainMenuPembeli.showLoginPanel();
+        });
         submitButton.addActionListener(e -> {
             do {
                 String nameReg = nameField.getText();

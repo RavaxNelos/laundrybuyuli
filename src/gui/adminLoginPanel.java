@@ -33,6 +33,12 @@ public class AdminLoginPanel extends JPanel {
 
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
+        JLabel tittleLabel = new JLabel("Admin Login Dashboard", JLabel.CENTER);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        card.add(tittleLabel, gbc);
+
         JLabel nameLabel = new JLabel("Nama:");
         gbc.gridx = 0;
         gbc.gridy = 1;

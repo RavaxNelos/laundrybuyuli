@@ -74,7 +74,8 @@ public class AdminKelolaPelanggan extends JPanel {
         add(btnPanel, gbc);
 
         addButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Fitur Tambah Pelanggan belum tersedia.");
+            MainMenuAdmin.showAdminKelolaAddPelangganPanel(); 
+            
         });
         editButton.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "Fitur Edit Pelanggan belum tersedia.");
@@ -89,7 +90,7 @@ public class AdminKelolaPelanggan extends JPanel {
 
 }
 /*
-            MainMenuAdmin.showAdminKelolaAddPelangganPanel(); 
+            JOptionPane.showMessageDialog(this, "Fitur Tambah Pelanggan belum tersedia.");
             MainMenuAdmin.showAdminKelolaEditPelangganPanel();
             MainMenuAdmin.showAdminKelolaDelPelangganPanel();
             
