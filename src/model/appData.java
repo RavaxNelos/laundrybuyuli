@@ -10,4 +10,5 @@ public class AppData {
     public ArrayList<Admin> admins = new ArrayList<>();
     public Customer currentUser;
     public Admin currentAdmin;
+    public Courier currentCourier;
 }

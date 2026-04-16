@@ -1,5 +1,7 @@
 package model;
 
+import javax.swing.JOptionPane;
+
 public class Order { // class untuk merepresentasikan data pesanan laundry
 
     public String idOrder; // menyimpan ID unik order
@@ -25,6 +27,37 @@ public class Order { // class untuk merepresentasikan data pesanan laundry
         // ambil harga dari service berdasarkan berat
         this.harga = service.hitungHarga(berat);
     }
+
+    //method updatestatus sesuai dengan layanan dipilih
+    public void updateStatus() {
+    String layanan = service.namaLayanan.toLowerCase();
+
+    switch (status) {
+        case DITERIMA:
+            if (layanan.contains("cuci")) {
+                status = StatusLaundry.DICUCI;
+            } else if (layanan.contains("setrika")) {
+                status = StatusLaundry.DISETRIKA;
+            }
+            break;
+
+        case DICUCI:
+            if (layanan.contains("setrika")) {
+                status = StatusLaundry.DISETRIKA;
+            } else {
+                status = StatusLaundry.SELESAI;
+            }
+            break;
+
+        case DISETRIKA:
+            status = StatusLaundry.SELESAI;
+            break;
+
+        case SELESAI:
+            JOptionPane.showMessageDialog(null, "Laundry sudah selesai!");
+            break;
+    }
+}
 
     @Override
     public String toString() { // method untuk menampilkan data order dalam bentuk string

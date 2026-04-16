@@ -50,7 +50,7 @@ public class AdminMainPanel extends JPanel {
             MainMenuAdmin.showAdminKelolaPelangganPanel();
         });
         manageOrdersButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Fitur Kelola Pesanan belum tersedia.");
+            MainMenuAdmin.showAdminKelolaPesananPanel();
         });
         logoutButton.addActionListener(e -> {
             int confirm = JOptionPane.showConfirmDialog(this, "Apakah Anda yakin ingin logout?", "Konfirmasi Logout", JOptionPane.YES_NO_OPTION);

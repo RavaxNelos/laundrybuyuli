@@ -54,4 +54,9 @@ public class MainMenuAdmin {
         frame.revalidate();
         frame.repaint();
     }
+    public static void showAdminKelolaPesananPanel() {
+        frame.setContentPane(new AdminKelolaPesanan(data));
+        frame.revalidate();
+        frame.repaint();
+    }
 }

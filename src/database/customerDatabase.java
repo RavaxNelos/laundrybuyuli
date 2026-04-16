@@ -163,7 +163,7 @@ public class CustomerDatabase {
 
     // Method untuk validasi login berdasarkan customer ID
     public static Customer validateLogin(String customerId, String password) {
-        String sql = "SELECT * FROM customer WHERE customer_id = ? AND password = ?";
+        String sql = "SELECT * FROM customer WHERE BINARY nama_customer = ? AND BINARY password = ?";
 
         try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -190,7 +190,7 @@ public class CustomerDatabase {
 
     // Method untuk validasi login berdasarkan customer name
     public static Customer validateLoginByName(String customerName, String password) {
-        String sql = "SELECT * FROM customer WHERE nama_customer = ? AND password = ?";
+        String sql = "SELECT * FROM customer WHERE BINARY nama_customer = ? AND BINARY password = ?";
 
         try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 

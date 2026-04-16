@@ -160,7 +160,7 @@ public class AdminDatabase {
 
     //Method untuk validasi login admin by ID
     public static Admin validateLogin(String adminId, String password) {
-        String sql = "SELECT * FROM admins WHERE admin_id = ? AND password = ?";
+        String sql = "SELECT * FROM admin WHERE BINARY nama_admin = ? AND BINARY password = ?";
 
         try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -185,7 +185,7 @@ public class AdminDatabase {
 
     // Method untuk validasi login admin by nama
     public static Admin validateLoginByNama(String namaAdmin, String password) {
-        String sql = "SELECT * FROM admins WHERE nama_admin = ? AND password = ?";
+        String sql = "SELECT * FROM admins WHERE BINARY nama_admin = ? AND BINARY password = ?";
 
         try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 

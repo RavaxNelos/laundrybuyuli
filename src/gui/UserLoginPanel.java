@@ -20,17 +20,16 @@ public class UserLoginPanel extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
 
-
         setLayout(new BorderLayout());
 
-// PANEL UTAMA (CARD)
+        // PANEL UTAMA (CARD)
         JPanel card = new JPanel(new GridBagLayout());
         card.setBorder(BorderFactory.createTitledBorder("Login Page"));
 
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-// ===== TITLE =====
+        // ===== TITLE =====
         JLabel title = new JLabel("Login Dashboard Laundry Bu Yuli", JLabel.CENTER);
         title.setFont(new Font("Arial", Font.BOLD, 18));
 
@@ -39,7 +38,7 @@ public class UserLoginPanel extends JPanel {
         gbc.gridwidth = 2;
         card.add(title, gbc);
 
-// ===== NAMA =====
+        // ===== NAMA =====
         gbc.gridwidth = 1;
         gbc.gridy = 1;
         gbc.gridx = 0;
@@ -51,7 +50,7 @@ public class UserLoginPanel extends JPanel {
         JTextField nameField = new JTextField(15);
         card.add(nameField, gbc);
 
-// ===== PASSWORD =====
+        // ===== PASSWORD =====
         gbc.gridy = 2;
         gbc.gridx = 0;
         gbc.anchor = GridBagConstraints.EAST;
@@ -62,7 +61,7 @@ public class UserLoginPanel extends JPanel {
         JPasswordField passField = new JPasswordField(15);
         card.add(passField, gbc);
 
-// ===== BUTTON =====
+        // ===== BUTTON =====
         JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 5));
         JButton loginButton = new JButton("Login");
         JButton registerButton = new JButton("Register");
@@ -78,10 +77,11 @@ public class UserLoginPanel extends JPanel {
         gbc.anchor = GridBagConstraints.CENTER;
         card.add(btnPanel, gbc);
 
-// ===== MASUKIN KE FRAME (CENTER) =====
+        // ===== MASUKIN KE FRAME (CENTER) =====
         add(card);
         exitButton.addActionListener(e -> {
-            int confirm = JOptionPane.showConfirmDialog(this, "Apakah Anda yakin ingin keluar?", "Konfirmasi Keluar", JOptionPane.YES_NO_OPTION);
+            int confirm = JOptionPane.showConfirmDialog(this, "Apakah Anda yakin ingin keluar?", "Konfirmasi Keluar",
+                    JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
                 System.exit(0);
             }

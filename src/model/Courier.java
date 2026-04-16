@@ -5,11 +5,13 @@ import java.util.ArrayList;
 public class Courier extends User {// Courier mewarisi User
 
     ArrayList<Order> orders;
+    public String password;
 
     // constructor Courier
-    public Courier(String id, String nama, String noHp,
+    public Courier(String id, String nama, String noHp, String password,
             ArrayList<Order> orders) {
         super(id, nama, noHp);
+        this.password = password;
         this.orders = orders;
     }
 
