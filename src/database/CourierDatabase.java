@@ -5,8 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import model.Admin;
 import model.Courier;
 
 public class CourierDatabase {
@@ -51,7 +49,7 @@ public class CourierDatabase {
     }
     // validasi login kurir
     public static Courier loginCourier(String username, String password) {
-        String sql = "SELECT * FROM courier WHERE BINARY nama_courier = ? AND BINARY password = ?";
+        String sql = "SELECT * FROM couriers WHERE BINARY nama_courier = ? AND BINARY password = ?";
 
         try (Connection conn = getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {

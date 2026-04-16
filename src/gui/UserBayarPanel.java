@@ -40,23 +40,24 @@ public class UserBayarPanel extends JPanel {
         add(title, gbc);
 
         // ================= TABLE =================
-        String[] kolom = { "ID Order", "Layanan", "Berat", "Total", "Status" };
+        String[] kolom = {"ID Order", "Layanan", "Berat", "Total", "Status"};
         DefaultTableModel model = new DefaultTableModel(kolom, 0) {
+            @Override
             public boolean isCellEditable(int r, int c) {
                 return false;
             }
         };
 
         if (userOrders.isEmpty()) {
-            model.addRow(new Object[] { "-", "Tidak ada pesanan", "-", "-", "-" });
+            model.addRow(new Object[]{"-", "Tidak ada pesanan", "-", "-", "-"});
         } else {
             for (Order o : userOrders) {
                 Object[] row = {
-                        o.idOrder,
-                        o.service.namaLayanan,
-                        o.berat + " Kg",
-                        "Rp" + o.harga,
-                        o.sudahBayar ? "Lunas" : "Belum Bayar"
+                    o.idOrder,
+                    o.service.namaLayanan,
+                    o.berat + " Kg",
+                    "Rp" + o.harga,
+                    o.sudahBayar ? "Lunas" : "Belum Bayar"
                 };
                 model.addRow(row);
             }
@@ -141,8 +142,7 @@ public class UserBayarPanel extends JPanel {
             boolean updated = OrderDatabase.updateOrder(selectedOrder);
 
             if (updated) {
-                JOptionPane.showMessageDialog(this,
-                        "Pembayaran berhasil!\nTotal: Rp" + selectedOrder.harga);
+                JOptionPane.showMessageDialog(this, "Pembayaran berhasil!\nTotal: Rp" + selectedOrder.harga);
                 MainMenuPembeli.showDashboardPanel();
             } else {
                 JOptionPane.showMessageDialog(this, "Gagal update pembayaran!");

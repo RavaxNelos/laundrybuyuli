@@ -1,7 +1,7 @@
 package main;
 
-import javax.swing.*;
 import gui.*;
+import javax.swing.*;
 import model.*;
 
 public class MainMenuCourier {
@@ -13,7 +13,7 @@ public class MainMenuCourier {
         data = new AppData();
 
         frame = new JFrame("Courier Laundry");
-        frame.setSize(500, 400);
+        frame.setSize(900, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
 
